@@ -1,20 +1,18 @@
 Wspólne zasady:
 1. Wszystkie zmienne w JS piszemy camelCase
-2. Style piszemy w SCSS, importujemy style z komponentów do wspolnego importu ze stylami
-3. Style wpływające na inne komponenty konsultujemy na Daily
+2. Metody zwracające true/false zaczynamy od słów is... lub has...
+3. Staramy się używać "===" zamiast "=="
+4. Rezygnujemy z proponowanych ról na rzecz poświęcenia więcej czasu na JS
+5. Testy w pierwszym sprincie nie są wymagane
+6. W przypadku komponentu który nie posiada wielu "dzieci" staramy się korzystać z appendChild itp.
+7. Style piszemy w SCSS, importujemy style z komponentów do wspolnego importu ze stylami
+8. Style wpływające na inne komponenty konsultujemy na Daily
 
 
 
 
 # CodersCamp 2020 - Projekt JavaScript
 **CodersCamp (coderscamp.edu.pl) - Największy otwarty kurs programowania webowego** 
-
-Wykorzystanie asynchronicznego JavaScript oraz korzystanie z REST API.
-
-![Star Wars Quiz - Ekrany](./.github/images/StarWarsQuizEkrany.png)
-Proponowany projekt — Quiz Star Wars (opis poniżej).
-
-### Zasady wykonywania projektu (wspólne dla wszystkich grup i mentorów): 
 
 ##### W projekcie każdy z uczestników powinien zaprezentować praktyczną znajomość poniższych zagadnień związanych z JavaScript:
 - zmienne
@@ -41,60 +39,6 @@ Proponowany projekt — Quiz Star Wars (opis poniżej).
 - metody HTTP
 - pisanie testów jednostkowych 
 
-Do implementacji nie używajcie React (tego nauczycie się w dalszej części kursu), czy takich frameworków jak Angular.
-Najlepiej odstawcie też na bok biblioteki stylów takie jak Bootstrap — na upraszczanie życia przyjdzie jeszcze czas.
-Ważne, żeby opanować, to co, jest pod spodem gotowych już bibliotek i budować na solidnym fundamencie.
-Skupcie się na wykorzystaniu w praktyce tego, co nauczyliście się dzięki materiałom w przerabianym dziale.
- 
-
-##### W trakcie trwania projektu należy wyznaczyć w zespole odpowiednie funkcje
-Aby zespół pracował efektywnie, ważne jest, żeby było wiadomo, kto odpowiada, za jaką kwestię.
-Powstało wiele różnych metodyk wspomagające działanie zespołu, które stosuje się także przy pracy programisty.
-
-W trakcie trwania kursu CodersCamp spróbujemy przemycić Wam o nich jak najwięcej w praktyce.
-Niestety forma kursu znacznie ogranicza możliwości — zazwyczaj programiści na swoją pracę i jej organizację poświęcają cały etat. 
-Tutaj nie mamy tyle czasu na pełne zastosowanie np. Scruma, czy też innych technik.
-Mamy jednak nadzieję, że po kursie nie będą one dla Was już wielką niewiadomą.
-Mentorzy z pewnością postarają się zorganizować Wam pracę tak, aby w jak największym stopniu odzwierciedlała realia ich codzienności.
-
-Pierwszym krokiem do lepszej organizacji Waszego zespołu będzie wyznaczenie w nim kilku funkcji, które są typowe dla projektów IT.
-Z pewnością spotkanie się z nimi w praktyce zawodowej.
-Najlepiej, gdyby uczestnicy po prostu się zgłosili. 
-W przypadku braku chętnych mentor wyznacza „ochotników".
-Oczywiście każda z ról wykonuje prace programistyczne (w przypadku CodersCamp, w rzeczywistości jest to różnie), dodatkowo zajmując się wspomnianymi dla danej roli obowiązkami.
-Role należy zmieniać następnie co projekt, aby każdy miał szansę się sprawdzić w którejś z nich.
-Szczególnie w pierwszym projekcie poproście mentora o pomoc w spełnianiu swoich ról i podzieleniu się zadaniami.
-Wasz mentor może oczywiście pokierować pracą trochę inaczej i zaproponować inny podział lub dodać też jakąś funkcję w zespole.
-Warto zorganizować spotkanie rozpoczynające prace, na którym wykonacie i/lub omówicie podstawowy setup projektu.
-
-###### Klient
-Zawsze jest to **Mentor**. Uważajcie! 
-Ten klient ma też zdolności techniczne i lepiej z nim nie dyskutować, jeśli coś „zaproponuje”.
-Dodatkowe testy czy zmiana sposobu implementacji to uwagi jak najbardziej na miejscu. 
-Pamiętajcie też, że jedyną stałą w projektach informatycznych jest zmiana.
-Wszelkie zmiany w projekcie, jakie zaproponuje Klient, powinny jak najbardziej zostać wzięte pod uwagę :) 
-W sytuacjach krytycznych można też poprosić go o posłużenie radą. Będzie też przeglądał każdy wasz wykonany kod.
-
-###### Tech Lead
-Ma ostateczne zdanie w kwestiach związanych z technologią, ale dobrze, jeśli radzi się zespołu.
-Np. jak dzielimy moduły projektu, w jaki sposób testujemy, której biblioteki użyć.
-Powinien też respektować zdanie klienta.
-Jeśli Tech Lead będzie przeprowadzał Code Review zadań, jest to jak najbardziej na plus. 
-Chociaż zachęcamy do tego wszystkich członków zespołu.
-
-###### Product Owner
-Odpowiada za wizję produktu i kwestie związane z funkcjonalnościami. 
-Powinien podejmować ostateczne decyzje odnośnie do wątpliwości związanych z wymaganiami i wyjaśniać je z klientem.
-Bardzo pożądane jest, aby często konsultował się z klientem i starał się, aby reszta zespołu mogła się skupić na swoich zadaniach zamiast doprecyzowywaniu wymagań.
-
-###### Development Manager
-Oczywiście Klientowi zależy najbardziej na tym, aby projekt zakończył się na czas. 
-Dlatego zespół będzie nieustannie przez niego kontrolowany.
-Jednakże, w trakcie pracy ważne jest, aby uzyskać zaufanie klienta i te kontrole nie były w ogóle potrzebne.
-Development Manager będzie dbał odpowiednio o terminy, podział zadań, a także wywiązywanie się z obowiązków innych członków zespołu.
-Powinien też kontrolować jakoś pracy — np. poprzez pilnowanie regularnych Code Review lub organizowanie programowania w parach (jeśli Wasz mentor jest za takimi praktykami).
-Jeśli spełni odpowiednio swoją funkcję, to duża szansa, że uda wam się uformować efektywny i zgrany zespół, a klienci nie będą wypatrywali tylko na wasze potknięcia :)
-W gestii Development Managera leży też organizowanie codziennych daily. Najlepiej, aby przyjęły formę wiadomości na Discord. 
 W ciągu dnia każda osoba z zespołu powinna odpowiedzieć na 3 pytania:
 - Co zrobiła od ostatniego daily?
 - Co planuje zrobić do kolejnego daily?
@@ -155,8 +99,6 @@ aby wykonać np. coś związanego z zainteresowaniami Waszej grupy :)
 W trakcie Coders Camp będą do wykonania jeszcze 2 kolejne aplikacje, więc jeśli teraz zdecydujecie się na projekt proponowany, zawsze w kolejnych możecie wykonać aplikacje wg. własnego pomysłu.
 **Ostateczną decyzję, jaką aplikację realizować podejmuje mentor — to on zawsze wie najlepiej, co będzie z największą korzyścią dla Was i przy czym najwięcej się nauczycie.**
 Powodzenia!
- 
-Czas porzucić narrację CodersCamp i wcielić się w członka zespołu projektowego...
 
 ### Założenia projektowe
 Jedna ze znanych marek płatków śniadaniowych prowadzi wieloletnią współpracę z wytwórnią filmów Disney, do której od niedawna należą także Gwiezdne Wojny.
