@@ -1,3 +1,11 @@
+Wspólne zasady:
+1. Wszystkie zmienne w JS piszemy camelCase
+2. Style piszemy w SCSS, importujemy style z komponentów do wspolnego importu ze stylami
+3. Style wpływające na inne komponenty konsultujemy na Daily
+
+
+
+
 # CodersCamp 2020 - Projekt JavaScript
 **CodersCamp (coderscamp.edu.pl) - Największy otwarty kurs programowania webowego** 
 
