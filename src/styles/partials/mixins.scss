@@ -1,0 +1,14 @@
+@mixin Content($justifyTo: center,$alignTo:center,$backgroundColor:#FFFF,$color:black,$padding:0,$border:0,$borderRadius:0,$fontSize:10px,$fontWeight:normal,$boxShadow:0) {
+  display: inline-block;
+  justify-content: $justifyTo;
+  align-items: $alignTo;
+  background-color:$backgroundColor;
+  color:$color;
+  padding:$padding;
+  border: $border;
+  border-radius: $borderRadius;
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  box-shadow: $boxShadow;
+  box-sizing: border-box;
+}
