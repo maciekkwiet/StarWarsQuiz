@@ -1,0 +1,8 @@
+@mixin BoxContent() 
+{
+  box-sizing: border-box;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  @content;
+}
