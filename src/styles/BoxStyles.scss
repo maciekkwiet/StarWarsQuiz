@@ -1,5 +1,12 @@
 @import 'partials/mixins';
 
 #box {
-    @include Content($padding:20px 200px,$borderRadius:5px, $fontSize:30px,$fontWeight:bold,$boxShadow: 0 0 1em red);
+    @include Content{
+        box-shadow:0;
+        padding:20px;
+        border-radius:5px;
+        font-size:30px;
+        font-weight:bold;
+        box-shadow: 0 0 1em red;
+    }
 }
