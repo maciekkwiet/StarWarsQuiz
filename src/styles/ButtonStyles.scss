@@ -5,22 +5,20 @@
   .play-button {
     max-width: 600px;
     max-height: 100px;
-
     padding: 0.75rem 7rem;
-
     font-family: 'Montserrat', sans-serif;
     font-weight: font-weight(normal);
     font-size: 42px;
     line-height: 1.2;
     text-transform: uppercase;
     text-align: center;
-
     color: $white;
     background-color: $red-background;
-
+    outline: none;
     border: none;
     border-radius: 16px;
     box-shadow: 0px 4px 4px $black-shadow, 0px 4px 30px $red-shadow;
+    cursor: pointer;
 
     &:hover {
       background-color: $red-shadow;
