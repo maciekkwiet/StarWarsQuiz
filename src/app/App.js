@@ -1,6 +1,7 @@
 import Box from './components/Box';
-import {MainMenu} from './components/MainMenu';
+import { MainMenu, gameModeIndex } from './components/MainMenu';
 export const App = ({ options }) => {
-  // new Box('MODE: who is this character', 'box');
-  MainMenu();
+  // new Box('MODE:Who is the character', 'box');
+  const MainMenuPanel = new MainMenu('mainMenu', ['People', 'Vehicles', 'Starships'], gameModeIndex);
+
 };
