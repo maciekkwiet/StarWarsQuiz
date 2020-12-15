@@ -1,7 +1,7 @@
 export class MainMenu {
   constructor(id, content, gameModeIndex) {
-    this.gameModeIndex = gameModeIndex,
-      this.render(id, content);
+    this.gameModeIndex = gameModeIndex;
+    this.render(id, content);
   }
 
   renderContent(id, content) {
@@ -9,7 +9,7 @@ export class MainMenu {
     mainMenuContainer.classList.add('mainMenu');
     for (let i = 0; i < 3; i++) {
       mainMenuContainer.appendChild(document.createElement('div'));
-    }
+    };
     const modeContainers = document.querySelectorAll('.mainMenu > div');
 
     modeContainers.forEach(el => {
@@ -22,23 +22,26 @@ export class MainMenu {
 
     btns.forEach((btn, index) => {
       btn.textContent = content[index];
-
-      const btnIndex = () => {
+      const removeClasses = () => {
         underscores.forEach(un => un.classList.remove('mainMenuActive'));
         btns.forEach(btn => btn.classList.remove('black'));
+      };
+      const addClasses = () => {
         underscores[index].classList.add('mainMenuActive');
         btns[index].classList.add('black');
-        this.gameMode(index);
       };
 
+      const btnIndex = () => {
+        removeClasses();
+        addClasses();
+        this.gameMode(index);
+      };
       btn.addEventListener('click', btnIndex);
     });
 
   }
-
   gameMode(index) {
     this.gameModeIndex = index;
-    console.log(this.gameModeIndex);
   };
   render(id, content) {
     this.renderContent(id, content);
