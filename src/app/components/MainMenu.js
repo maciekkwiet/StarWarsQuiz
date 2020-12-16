@@ -7,16 +7,12 @@ export class MainMenu {
   renderContent(id, content) {
     const mainMenuContainer = document.querySelector(`#${id}`);
     mainMenuContainer.classList.add('mainMenu');
-    for (let i = 0; i < 3; i++) {
-      mainMenuContainer.appendChild(document.createElement('div'));
-    };
-    const modeContainers = document.querySelectorAll('.mainMenu > div');
-
-    modeContainers.forEach(el => {
-      el.appendChild(document.createElement('button'));
-      el.appendChild(document.createElement('div'));
-    });
-
+    for (let i = 0; i < content.length; i++) {
+      let modeContainer = document.createElement('div');
+      modeContainer.appendChild(document.createElement('button'));
+      modeContainer.appendChild(document.createElement('div'));
+      mainMenuContainer.appendChild(modeContainer);
+    }
     const underscores = document.querySelectorAll('.mainMenu >div > div');
     const btns = document.querySelectorAll('.mainMenu > div > button');
 
