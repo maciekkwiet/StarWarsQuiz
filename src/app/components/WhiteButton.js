@@ -1,20 +1,17 @@
-class WhiteButton {
-  constructor(content, id) {
-    this.render(content, id);
+import Button from './Button';
+
+class WhiteButton extends Button {
+  constructor(id, content, styleName) {
+    super(id, content, styleName);
   }
 
-  contentRender(content, id) {
-    const container = document.querySelector(`#${id}`);
+  addIcon(iconPath) {
     const icon = document.createElement('img');
-    icon.setAttribute('src', '../static/assets/ui/hof.svg');
-    container.appendChild(icon);
-    const Content = document.createElement('span');
-    const text = container.appendChild(Content);
-    text.innerHTML = content;
-  }
-
-  render(content, id) {
-    this.contentRender(content, id);
+    icon.setAttribute('src', iconPath);
+    const container = document.querySelector(`#${this._id}`);
+    const button = container.getElementsByTagName('button');
+    console.log(button.item(0));
+    button.item(0).insertBefore(icon, button.item(0).firstChild);
   }
 }
 
