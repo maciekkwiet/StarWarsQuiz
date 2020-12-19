@@ -1,6 +1,6 @@
 import Box from './components/Box';
 import Button from './components/Button';
-import { RankingBox } from './components/rankingBox';
+import { RankingBox } from './components/RankingBox';
 export const App = ({ options }) => {
   new Box('MODE: who is this character', 'box');
   new Button('button', 'play the game');
