@@ -1,3 +1,18 @@
-$white: #FFFF;
-$red: #671C3F;
+$white: #ffff;
+$red: #671c3f;
 $black: #101010;
+
+/* Play button variables */
+$black-shadow: rgba(0, 0, 0, 0.25);
+$red-shadow: rgba(255, 0, 0, 1);
+$red-background: rgba(255, 0, 0, 0.9);
+
+$font-weights: (
+  'bold': 600,
+  'normal': 500,
+  'light': 400,
+);
+
+@function font-weight($weight-name) {
+  @return map-get($font-weights, $weight-name);
+}
