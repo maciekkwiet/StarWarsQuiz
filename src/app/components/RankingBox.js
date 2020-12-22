@@ -1,16 +1,8 @@
-export class Player {
-    constructor(onQuestion, onAnswer) {
-     this.onQuestion = onQuestion;
-     this.onAnswer = onAnswer;
+export class RankingBox {
+    constructor(id, scores) {
+      this.render(id, scores);
     }
 
-    askQuestion(question){
-        this
-    }
-
-    answerQuestion(){
-
-    }
       
     renderContent(id, scores) {
         const rankingBoxContainer = document.querySelector(`#${id}`);
