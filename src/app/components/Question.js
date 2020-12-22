@@ -51,7 +51,7 @@ class Question {
         while (i < this._howManyAnswers) {
             let id = this._createRandomInt(this._getMaxId(this._typeOfQuestion));
             let answer = await this._addAnswer(id);
-            if (answer !== -1) {
+            if (answer !== -1 && !this._answers.includes(answer.name)) {
                 this._answers.push(answer.name);
                 i++;
             }
@@ -59,12 +59,12 @@ class Question {
     }
 
     async getImage(id) {
-        
+
     }
 }
 
 const question = new Question('starships', 4);
 question.generateAnswers().then(() => {
     console.log(question.answers);
-    console.log(question.rightAnswer);
 });
+console.log(question.rightAnswer);
