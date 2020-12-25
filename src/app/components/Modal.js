@@ -1,31 +1,21 @@
 class Modal {
-  constructor(id, content) {
-    this.render(id, content);
+  constructor(id) {
+    this.render(id);
+    window.addEventListener('click', this.closeModalOutside)
   }
 
-  renderContent(id, content) {
-    const modal = document.getElementById(`${id}`);
-    const modalBox = document.createElement('div');
+  renderContent(id) {
+    const modalBox = document.getElementById(`${id}`);
     const close = document.createElement('span');
-    const modalContent = document.createElement('div');
     const modalSummoner = document.getElementById('modalSummoner');
-    
-    modalBox.setAttribute('class', 'modalBox');
+
     close.setAttribute('class', 'close');
-    modalContent.setAttribute('class', 'modalContent');
-    
     close.innerHTML = '&times;';
-    modalContent.innerHTML = content;
-    
-    modal.appendChild(modalBox);
-    modalBox.appendChild(close);
-    modalBox.appendChild(modalContent);
-
-    modalSummoner.addEventListener('click', this.openModal);
-
     close.addEventListener('click', this.closeModal);
 
-    window.addEventListener('click', this.closeModalOutside)
+    modalBox.appendChild(close);
+
+    modalSummoner.addEventListener('click', this.openModal);
   }
 
   closeModal() {
@@ -33,17 +23,15 @@ class Modal {
   }
 
   closeModalOutside(e) {
-    if (e.target == modal) {
-      modal.style.display = 'none';
-    }
+    e.target === modal ? modal.style.display = 'none' : null;
   }
 
   openModal() {
     modal.style.display = "block";
   }
 
-  render(id, content) {
-    this.renderContent(id, content);
+  render(id) {
+    this.renderContent(id);
   }
 };
 

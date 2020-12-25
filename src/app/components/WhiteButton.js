@@ -10,7 +10,6 @@ class WhiteButton extends Button {
     icon.setAttribute('src', iconPath);
     const container = document.querySelector(`#${this._id}`);
     const button = container.getElementsByTagName('button');
-    console.log(button.item(0));
     button.item(0).insertBefore(icon, button.item(0).firstChild);
   }
 }
