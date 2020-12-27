@@ -5,6 +5,7 @@ import WhiteButton from './components/WhiteButton';
 import Modal from './components/Modal';
 import { Rules } from './components/Rules';
 import { RulesContent } from './tools/RulesContent';
+
 class App {
   constructor(options) {
     this.box = new Box('MODE: who is this character', 'box');
@@ -19,9 +20,10 @@ class App {
     this.rules = new Rules('Mode Rules', 'rules');
 
     this.btns = document.querySelectorAll('.mainMenu > div > button');
+    this.underscores = document.querySelectorAll('.mainMenu > div > div');
     this.btns.forEach((btn, index) => {
-      btn.addEventListener('click', (e) => {
-        this.mainMenuPanel.btnIndex(e, this.btns);
+      btn.addEventListener('click', () => {
+        this.mainMenuPanel.btnIndex(index);
         RulesContent(index);
       });
     })
