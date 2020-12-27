@@ -20,8 +20,9 @@ class App {
 
     this.btns = document.querySelectorAll('.mainMenu > div > button');
     this.btns.forEach((btn, index) => {
-      btn.addEventListener('click', () => {
-        RulesContent(index)
+      btn.addEventListener('click', (e) => {
+        this.mainMenuPanel.btnIndex(e, this.btns);
+        RulesContent(index);
       });
     })
   }
