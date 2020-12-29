@@ -3,8 +3,8 @@ import MainMenu from './components/MainMenu';
 import Button from './components/Button';
 import WhiteButton from './components/WhiteButton';
 import Modal from './components/Modal';
-import { Rules } from './components/Rules';
-import { RulesContent } from './tools/RulesContent';
+import Rules from './components/Rules';
+import { rulesContent } from './tools/RulesContent';
 
 class App {
   constructor(options) {
@@ -17,14 +17,14 @@ class App {
 
     this.whiteButton.addIcon('../../static/assets/ui/hof.svg');
 
-    this.rules = new Rules('Mode Rules', 'rules');
+    this.rules = new Rules('Mode Rules', 'rules', rulesContent);
 
     this.btns = document.querySelectorAll('.mainMenu > div > button');
     this.underscores = document.querySelectorAll('.mainMenu > div > div');
     this.btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
         this.mainMenuPanel.btnIndex(index);
-        RulesContent(index);
+        this.rules.handleRulesContent(index);
       });
     })
   }

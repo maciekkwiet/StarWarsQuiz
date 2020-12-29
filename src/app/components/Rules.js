@@ -1,6 +1,8 @@
+import { rulesContent } from "../tools/RulesContent";
 
-export class Rules {
-  constructor(content, id) {
+class Rules {
+  constructor(content, id, rulesContent) {
+    this.rulesContent = rulesContent;
     this.render(content, id);
   }
   contentRender(content, id) {
@@ -15,10 +17,16 @@ export class Rules {
     container.appendChild(rulesHeader);
     const modeRules = document.createElement('p');
     container.appendChild(modeRules);
-    modeRules.textContent = 'You have one minute (1m) to answer as many questions as possible. During the game on each question you need to select who from Star Wars is showed on the left (Jar Jar Binks right now) from available options.';
+    modeRules.textContent = this.rulesContent[0];
+  }
+
+  handleRulesContent(index) {
+    const rulesContainer = document.querySelector('#rules p');
+    rulesContainer.textContent = rulesContent[index];
   }
   render(content, id) {
     this.contentRender(content, id);
   }
 }
 
+export default Rules;
