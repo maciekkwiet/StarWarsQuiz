@@ -81,5 +81,7 @@ class Question {
         this._questionData.rightAnswer = this._rightAnswer;
       })
       .catch((error) => console.log(error));
+
+    return this._questionData;
   }
 }
