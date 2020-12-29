@@ -1,8 +1,10 @@
 @import 'partials/variables';
 @import 'partials/mixins';
-@import 'BoxStyles';
+
 @import 'basics';
-@import 'ButtonStyles';
+
+@import 'BoxStyles';
+@import 'PlayButtonStyles';
 @import 'WhiteButtonStyles';
 @import 'MainMenuStyles';
-@import 'Modal';
+@import 'ModalStyles';
