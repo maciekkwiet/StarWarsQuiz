@@ -12,5 +12,8 @@ export const App = ({ options }) => {
   const whiteButton = new WhiteButton('whiteButton', 'Hall of fame', 'whiteButton');
   whiteButton.addIcon('../../static/assets/ui/hof.svg');
   const time = 80
-  new Timer(time, 'timer-box');
+  const timer  = new Timer(time,'timer-box')
+  setInterval(function() {
+    timer.decrement()
+  },1000);
 }

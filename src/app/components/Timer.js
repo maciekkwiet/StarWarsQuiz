@@ -1,18 +1,26 @@
 class Timer {
     constructor(time, id) {
-    this.render(time, id);
+        this.time = time;
+        this.render(id);
     }
   
-    contentRender(time, id) {
+    contentRender(id) {
       const timerBox = document.querySelector(`#${id}`);
-      const timer = document.createElement('p');
-      const text = timerBox.appendChild(timer);
-      text.innerHTML = `Time Left: ${Math.floor(time/60)}m ${time%60}s`;
+      this.paragraph = document.createElement('p');
+      timerBox.appendChild(this.paragraph);
+      this.paragraph.innerHTML = `Time Left: ${Math.floor((this.time)/60)}m ${(this.time)%60}s`;
     }
-  
-    render(time, id) {
-      this.contentRender(time, id);
+
+    render(id) {
+        this.contentRender(id);
     }
-  }
+
+    decrement() {
+        if (this.time > 0) {
+            this.time-- 
+        }
+        this.paragraph.innerHTML = `Time Left: ${Math.floor((this.time)/60)}m ${(this.time)%60}s`;
+    }
+}
   
   export default Timer;
