@@ -4,23 +4,20 @@ class MainMenu {
     this.gameModeIndex = gameModeIndex;
     this.render(id, content);
     this.underscores = document.querySelectorAll('.mainMenu > div > div');
-    this.addClasses(gameModeIndex)
   }
 
-  btnIndex(index) {
-    this.removeClasses(index);
-    this.addClasses(index);
+  btnIndex(index, btns) {
+    this.removeClasses(btns);
+    this.addClasses(index, btns);
     this.gameMode(index);
   };
 
-  removeClasses(index) {
-    const btns = document.querySelectorAll('.mainMenu > div > button');
+  removeClasses(btns) {
     this.underscores.forEach(un => un.classList.remove('mainMenuActive'));
     btns?.forEach(btn => btn.classList.remove('black'));
   };
 
-  addClasses(index) {
-    const btns = document.querySelectorAll('.mainMenu > div > button');
+  addClasses(index, btns) {
     this.underscores[index].classList.add('mainMenuActive');
     btns ? btns[index].classList.add('black') : null;
   };

@@ -4,7 +4,6 @@ import Button from './components/Button';
 import WhiteButton from './components/WhiteButton';
 import Modal from './components/Modal';
 import Rules from './components/Rules';
-import { rulesContent } from './tools/RulesContent';
 
 class App {
   constructor(options) {
@@ -17,13 +16,13 @@ class App {
 
     this.whiteButton.addIcon('../../static/assets/ui/hof.svg');
 
-    this.rules = new Rules('Mode Rules', 'rules', rulesContent);
+    this.rules = new Rules('Mode Rules', 'rules');
 
     this.btns = document.querySelectorAll('.mainMenu > div > button');
-    this.underscores = document.querySelectorAll('.mainMenu > div > div');
+    this.mainMenuPanel.addClasses(this.mainMenuPanel.gameModeIndex, this.btns);
     this.btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
-        this.mainMenuPanel.btnIndex(index);
+        this.mainMenuPanel.btnIndex(index, this.btns);
         this.rules.handleRulesContent(index);
       });
     })

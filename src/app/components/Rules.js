@@ -1,7 +1,7 @@
-import { rulesContent } from "../tools/RulesContent";
+import { rulesContent } from "../tools/constants";
 
 class Rules {
-  constructor(content, id, rulesContent) {
+  constructor(content, id) {
     this.rulesContent = rulesContent;
     this.render(content, id);
   }
@@ -11,8 +11,8 @@ class Rules {
     const icon = document.createElement('img');
     icon.setAttribute('src', '../static/assets/ui/school.svg');
     rulesHeader.appendChild(icon);
-    const Content = document.createElement('span');
-    const text = rulesHeader.appendChild(Content);
+    const ButtonTittle = document.createElement('span');
+    const text = rulesHeader.appendChild(ButtonTittle);
     text.innerHTML = content;
     container.appendChild(rulesHeader);
     const modeRules = document.createElement('p');
