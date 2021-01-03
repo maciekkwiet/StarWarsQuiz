@@ -21,7 +21,7 @@ class App {
     this.mainMenuPanel.addClasses(this.mainMenuPanel.gameModeIndex, this.btns);
     const time = 80;
     this.timer = new Timer(time,'timer-box');
-    setInterval(function() {
+    setInterval(() => {
       this.timer.decrement()
     }, 1000);
     this.btns.forEach((btn, index) => {
