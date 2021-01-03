@@ -4,6 +4,7 @@ import Button from './components/Button';
 import { RankingBox } from './components/RankingBox';
 import WhiteButton from './components/WhiteButton';
 import Modal from './components/Modal';
+import Timer from './components/Timer';
 import Rules from './components/Rules';
 class App {
   constructor(options) {
@@ -18,6 +19,11 @@ class App {
     this.rules = new Rules('Mode Rules', 'rules');
     this.btns = document.querySelectorAll('.mainMenu > div > button');
     this.mainMenuPanel.addClasses(this.mainMenuPanel.gameModeIndex, this.btns);
+    const time = 80;
+    this.timer = new Timer(time,'timer-box');
+    setInterval(() => {
+      this.timer.decrement()
+    }, 1000);
     this.btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
         this.mainMenuPanel.btnIndex(index, this.btns);
@@ -28,5 +34,3 @@ class App {
 }
 
 export default App
-
-
