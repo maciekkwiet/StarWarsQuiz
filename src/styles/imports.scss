@@ -1,8 +1,13 @@
 @import 'partials/variables';
 @import 'partials/mixins';
-@import 'BoxStyles';
 @import 'basics';
-@import 'ButtonStyles';
+@import 'BoxStyles';
+@import 'PlayButtonStyles';
+@import 'WhiteButtonStyles';
+@import 'PlayButtonStyles';
 @import 'MainMenuStyles';
 @import 'PictureStyles';
-
+@import 'Timer';
+@import 'RulesStyles';
+@import 'RankingBox';
+@import 'ModalStyles';
