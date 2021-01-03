@@ -1,3 +1,4 @@
+
 import Button from './Button';
 
 class WhiteButton extends Button {

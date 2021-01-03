@@ -4,11 +4,9 @@ class MainMenu {
     this.gameModeIndex = gameModeIndex;
     this.render(id, content);
     this.underscores = document.querySelectorAll('.mainMenu > div > div');
-    this.addClasses(gameModeIndex)
   }
 
-  btnIndex(e, btns) {
-    const index = this.content.indexOf(e.path[0].innerText)
+  btnIndex(index, btns) {
     this.removeClasses(btns);
     this.addClasses(index, btns);
     this.gameMode(index);
@@ -47,3 +45,4 @@ class MainMenu {
 }
 
 export default MainMenu
+

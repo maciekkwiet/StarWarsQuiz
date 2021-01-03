@@ -4,6 +4,7 @@ import Button from './components/Button';
 import { RankingBox } from './components/RankingBox';
 import WhiteButton from './components/WhiteButton';
 import Modal from './components/Modal';
+import Rules from './components/Rules';
 class App {
   constructor(options) {
     this.box = new Box('MODE: who is this character', 'box');
@@ -13,16 +14,19 @@ class App {
     this.modal = new Modal('modalBox');
     this.mainMenuPanel = new MainMenu('mainMenu', ['People', 'Vehicles', 'Starships'], 0);
     this.whiteButton = new WhiteButton('whiteButton', 'Hall of fame', 'whiteButton');
-    
     this.whiteButton.addIcon('../../static/assets/ui/hof.svg');
-
+    this.rules = new Rules('Mode Rules', 'rules');
     this.btns = document.querySelectorAll('.mainMenu > div > button');
-    this.btns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        this.mainMenuPanel.btnIndex(e, this.btns)
+    this.mainMenuPanel.addClasses(this.mainMenuPanel.gameModeIndex, this.btns);
+    this.btns.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+        this.mainMenuPanel.btnIndex(index, this.btns);
+        this.rules.handleRulesContent(index);
       });
     })
   }
 }
 
 export default App
+
+
