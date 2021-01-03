@@ -22,7 +22,7 @@ class App {
     const time = 80;
     this.timer = new Timer(time,'timer-box');
     setInterval(function() {
-      timer.decrement()
+      this.timer.decrement()
     }, 1000);
     this.btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
