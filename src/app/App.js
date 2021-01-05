@@ -6,6 +6,7 @@ import WhiteButton from './components/WhiteButton';
 import Modal from './components/Modal';
 import Timer from './components/Timer';
 import Rules from './components/Rules';
+import Lightsaber from './components/lightsaber';
 class App {
   constructor(options) {
     this.box = new Box('MODE: who is this character', 'box');
@@ -21,6 +22,7 @@ class App {
     this.mainMenuPanel.addClasses(this.mainMenuPanel.gameModeIndex, this.btns);
     const time = 80;
     this.timer = new Timer(time,'timer-box');
+    this.lightsaber = new Lightsaber(time, 'saber');
     setInterval(() => {
       this.timer.decrement()
     }, 1000);
