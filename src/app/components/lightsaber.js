@@ -15,13 +15,20 @@ class Lightsaber {
         const saberContainer = document.createElement('div');
         saberContainer.classList.add('saber__container');
         container.appendChild(saberContainer);
-        const saberLight = document.createElement('div');
-        saberLight.classList.add('saber__light');
-        saberContainer.appendChild(saberLight);
+        this.saberLight = document.createElement('div');
+        this.saberLight.classList.add('saber__light');
+        saberContainer.appendChild(this.saberLight);
     }
 
     render(id) {
         this.contentRender(id);
+    }
+
+    progress(time) {
+        if (this.time > 0) {
+            this.time--;
+            this.saberLight.style.width = ((this.time/time)*100) + '%';
+        }
     }
 }
 

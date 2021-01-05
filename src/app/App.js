@@ -24,7 +24,8 @@ class App {
     this.timer = new Timer(time,'timer-box');
     this.lightsaber = new Lightsaber(time, 'saber');
     setInterval(() => {
-      this.timer.decrement()
+      this.timer.decrement();
+      this.lightsaber.progress(time);
     }, 1000);
     this.btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
