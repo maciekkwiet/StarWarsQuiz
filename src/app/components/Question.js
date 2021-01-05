@@ -15,14 +15,12 @@ class Question {
   }
 
   _getMaxId() {
-    switch (this._typeOfQuestion) {
-      case 'people':
-        return 82;
-      case 'starships':
-        return 36;
-      case 'vehicles':
-        return 39;
-    }
+    const TypesOfQuestion = {
+      people: 82,
+      starships: 36,
+      vehicles: 39,
+    };
+    return TypesOfQuestion[this._typeOfQuestion];
   }
 
   _createRandomInt(max) {
@@ -42,12 +40,7 @@ class Question {
 
   async _addAnswer(id) {
     const response = await fetch(this._generateUrl(id, false));
-    if (response.ok) {
-      const answer = await response.json();
-      return answer;
-    } else {
-      return -1;
-    }
+    return response.ok ? await response.json() : -1;
   }
 
   _base64_encode(fileURL) {
@@ -82,6 +75,9 @@ class Question {
       })
       .catch((error) => console.log(error));
 
-    return this._questionData;
+    // return this._questionData;
   }
 }
+
+const question = new Question('people', 4);
+question.getQuestionData().then(() => console.log(question.questionData));
