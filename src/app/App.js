@@ -9,6 +9,8 @@ import Timer from './components/Timer';
 import Rules from './components/Rules';
 import Logo from './components/Logo';
 import Playground from './components/Playground';
+import { initialGMIndex } from "./tools/constants";
+import { whiteBtnText } from "./tools/constants";
 class App {
   constructor(options) {
     this.playground = new Playground('swquiz-app');
@@ -18,9 +20,9 @@ class App {
     const scores = [{player: "Anna", correctAnswers: 10, allAnswers:20},{player: "Kamil", correctAnswers: 7, allAnswers:20}, {player: "Ela", correctAnswers: 3, allAnswers:20}];
     this.rankingBox = new RankingBox('ranking-box', scores );
     this.modal = new Modal('modalBox');
-    this.mainMenuPanel = new MainMenu('mainMenu', ['People', 'Vehicles', 'Starships'], 0);
+    this.mainMenuPanel = new MainMenu('mainMenu', ['People', 'Vehicles', 'Starships'], initialGMIndex);
     this.picture = new Picture('picture');
-    this.whiteButton = new WhiteButton('whiteButton', 'Hall of fame', 'whiteButton');
+    this.whiteButton = new WhiteButton('whiteButton', whiteBtnText[0], 'whiteButton');
     this.whiteButton.addIcon('../../static/assets/ui/hof.svg');
 
     this.whiteBtn = document.querySelector('.whiteButton');
@@ -30,13 +32,13 @@ class App {
       const rulesElement = document.querySelector('#rules');
       const rankingElement = document.querySelector('#ranking-box');
 
-      if (whiteBtnContent.textContent === "Hall of fame") {
-        whiteBtnContent.textContent = "Rules";
+      if (whiteBtnContent.textContent === whiteBtnText[0]) {
+        whiteBtnContent.textContent = whiteBtnText[1];
         whiteBtnIcon.setAttribute('src', '../../static/assets/ui/school.svg');
         rulesElement.style.display = "none";
         rankingElement.style.display = "flex";
       } else {
-        whiteBtnContent.textContent = "Hall of fame";
+        whiteBtnContent.textContent = whiteBtnText[0];
         whiteBtnIcon.setAttribute('src', '../../static/assets/ui/hof.svg');
         rankingElement.style.display = "none";
         rulesElement.style.display = "flex";

@@ -4,6 +4,7 @@ export const boxContent = ['MODE : who is this character?', 'MODE : what is this
 
 export const exemplaryPicture = ['../static/assets/img/modes/people/1.jpg', '../static/assets/img/modes/vehicles/4.jpg', '../static/assets/img/modes/starships/5.jpg'];
 
+export const whiteBtnText = ['Hall of fame','Rules'];
 
 export const initialGMIndex = 0;
 
