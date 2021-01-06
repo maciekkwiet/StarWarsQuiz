@@ -7,6 +7,7 @@ import WhiteButton from './components/WhiteButton';
 import Modal from './components/Modal';
 import Timer from './components/Timer';
 import Rules from './components/Rules';
+import QuestionAnswers from './components/QuestionAnswers';
 class App {
   constructor(options) {
     this.box = new Box('MODE: who is this character', 'box');
@@ -21,6 +22,7 @@ class App {
     this.rules = new Rules('Mode Rules', 'rules');
     this.btns = document.querySelectorAll('.mainMenu > div > button');
     this.mainMenuPanel.addClasses(this.mainMenuPanel.gameModeIndex, this.btns);
+    this.questionAnswers = new QuestionAnswers('#answers', ['odp1', 'odp2', 'odp3'], 'odp1')
     const time = 80;
     this.timer = new Timer(time,'timer-box');
     setInterval(() => {
