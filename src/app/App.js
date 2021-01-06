@@ -7,9 +7,13 @@ import WhiteButton from './components/WhiteButton';
 import Modal from './components/Modal';
 import Timer from './components/Timer';
 import Rules from './components/Rules';
+import Logo from './components/Logo';
+import Playground from './components/Playground';
 class App {
   constructor(options) {
-    this.box = new Box('MODE: who is this character', 'box');
+    this.playground = new Playground('swquiz-app');
+    this.logo = new Logo('logo');
+    this.box = new Box('box');
     this.button = new Button('button', 'play the game', 'play-button');
     const scores = [{player: "Anna", correctAnswers: 10, allAnswers:20},{player: "Kamil", correctAnswers: 7, allAnswers:20}, {player: "Ela", correctAnswers: 3, allAnswers:20}];
     this.rankingBox = new RankingBox('ranking-box', scores );
@@ -18,6 +22,27 @@ class App {
     this.picture = new Picture('picture');
     this.whiteButton = new WhiteButton('whiteButton', 'Hall of fame', 'whiteButton');
     this.whiteButton.addIcon('../../static/assets/ui/hof.svg');
+
+    this.whiteBtn = document.querySelector('.whiteButton');
+    this.whiteBtn.addEventListener('click', () => {
+      const whiteBtnContent = document.querySelector('.whiteButton span');
+      const whiteBtnIcon = document.querySelector('.whiteButton img');
+      const rulesElement = document.querySelector('#rules');
+      const rankingElement = document.querySelector('#ranking-box');
+
+      if (whiteBtnContent.textContent === "Hall of fame") {
+        whiteBtnContent.textContent = "Rules";
+        whiteBtnIcon.setAttribute('src', '../../static/assets/ui/school.svg');
+        rulesElement.style.display = "none";
+        rankingElement.style.display = "flex";
+      } else {
+        whiteBtnContent.textContent = "Hall of fame";
+        whiteBtnIcon.setAttribute('src', '../../static/assets/ui/hof.svg');
+        rankingElement.style.display = "none";
+        rulesElement.style.display = "flex";
+      };
+    });
+
     this.rules = new Rules('Mode Rules', 'rules');
     this.btns = document.querySelectorAll('.mainMenu > div > button');
     this.mainMenuPanel.addClasses(this.mainMenuPanel.gameModeIndex, this.btns);
@@ -30,6 +55,8 @@ class App {
       btn.addEventListener('click', () => {
         this.mainMenuPanel.btnIndex(index, this.btns);
         this.rules.handleRulesContent(index);
+        this.box.handleBoxContent(index);
+        this.picture.handleExemplaryPicture(index);
       });
     })
   }
