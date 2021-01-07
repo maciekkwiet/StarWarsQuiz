@@ -26,8 +26,8 @@ class Question {
   _getTypeOfQuestion(index) {
     const TypeOfQuestionText = {
       0: 'people',
-      1: 'starships',
-      2: 'vehicles',
+      1: 'vehicles',
+      2: 'starships',
     };
     return TypeOfQuestionText[index];
   }
