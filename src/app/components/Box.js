@@ -1,5 +1,5 @@
-import { boxContent, questionContent } from '../tools/constants';
-import { initialGMIndex } from '../tools/constants';
+import { boxContent, questionContent } from '../constants';
+import { initialGMIndex } from '../constants';
 
 class Box {
   constructor(id) {

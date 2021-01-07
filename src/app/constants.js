@@ -24,6 +24,14 @@ export const exemplaryPicture = [
 
 export const whiteBtnText = ['Hall of fame', 'Rules'];
 
-export const playBtnText = 'play the game';
+export const playBtnText = 'Play the game';
 
 export const initialGMIndex = 0;
+
+export const scores = [
+  { player: 'Anna', correctAnswers: 10, allAnswers: 20 },
+  { player: 'Kamil', correctAnswers: 7, allAnswers: 20 },
+  { player: 'Ela', correctAnswers: 3, allAnswers: 20 },
+];
+
+export const mainMenuNames = ['People', 'Vehicles', 'Starships']

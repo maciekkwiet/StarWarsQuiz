@@ -3,17 +3,10 @@ export class RankingBox {
       this.render(id, scores);
     }
 
-      
-    renderContent(id, scores) {
-        const rankingBoxContainer = document.querySelector(`#${id}`);
-
-        this.renderHeader(rankingBoxContainer);
-
-        this.renderTable(scores, rankingBoxContainer);
-    }
-
     render(id, scores) {
-        this.renderContent(id, scores);
+        const rankingBoxContainer = document.querySelector(`#${id}`);
+        this.renderHeader(rankingBoxContainer);
+        this.renderTable(scores, rankingBoxContainer);
     }
 
     numberToOrdinal(number) { 

@@ -5,6 +5,7 @@ class Lightsaber {
     }
 
     contentRender(id) {
+        // rozbijmy to na dwie części
         const container = document.querySelector(`#${id}`);
         container.classList.add('saber');
         const pictureSrc = '../static/assets/ui/LightsaberHandle.png';

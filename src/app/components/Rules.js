@@ -1,11 +1,12 @@
-import { rulesContent } from "../tools/constants";
-import { initialGMIndex } from "../tools/constants";
+import { rulesContent } from "../constants";
+import { initialGMIndex } from "../constants";
 
 class Rules {
   constructor(content, id) {
     this.rulesContent = rulesContent;
     this.render(content, id);
   }
+  
   contentRender(content, id) {
     const container = document.querySelector(`#${id}`);
     const rulesHeader = document.createElement('div');
