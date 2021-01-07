@@ -23,5 +23,7 @@
         border-radius: 12px;
         box-shadow: 10px -5px 15px $light-red, 10px 5px 15px $light-red, 0px 5px 4px $dark-red;
         height: 100%;
+        transition: width 1s linear;
+        width: 100%;
     }
 }
