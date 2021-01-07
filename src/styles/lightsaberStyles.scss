@@ -25,5 +25,23 @@
         height: 100%;
         transition: width 1s linear;
         width: 100%;
+
+        &--pulse {
+            animation: pulse 1s linear infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                background-color: $white;
+            }
+
+            50% {
+                background-color: $light-red;
+            }
+
+            100% {
+                background-color: $white;
+            }
+        }
     }
 }

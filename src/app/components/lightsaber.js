@@ -27,7 +27,10 @@ class Lightsaber {
     progress(time) {
         if (this.time > 0) {
             this.time--;
-            this.saberLight.style.width = ((this.time/time)*100) + '%';
+            this.saberLight.style.width = ((this.time / time) * 100) + '%';
+            this.time === 15 ? this.saberLight.classList.add('saber__light--pulse') : null;
+            this.time === 10 ? this.saberLight.style.animation = 'pulse .5s linear infinite' : null;
+            this.time === 5 ? this.saberLight.style.animation = 'pulse .25s linear infinite' : null;
         }
     }
 }
