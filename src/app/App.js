@@ -62,6 +62,10 @@ class App {
       });
     })
   }
+  
+  isAnswerCorrect (correctAnswer, playerAnswer) {
+    return correctAnswer === playerAnswer;
+  }
 }
 
 export default App
