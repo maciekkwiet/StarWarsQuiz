@@ -1,6 +1,5 @@
-import { boxContent } from "../tools/constants";
-import { initialGMIndex } from "../tools/constants";
-
+import { boxContent, questionContent } from '../tools/constants';
+import { initialGMIndex } from '../tools/constants';
 
 class Box {
   constructor(id) {
@@ -12,11 +11,12 @@ class Box {
     const content = document.createElement('span');
     container.appendChild(content);
     content.textContent = boxContent[initialGMIndex];
-
   }
-  handleBoxContent(index) {
+  handleBoxContent(index, isQuestion) {
     const content = document.querySelector('#box span');
-    content.textContent = boxContent[index];
+    isQuestion
+      ? (content.textContent = questionContent[index])
+      : (content.textContent = boxContent[index]);
   }
 
   render(id) {
@@ -25,5 +25,3 @@ class Box {
 }
 
 export default Box;
-
-
