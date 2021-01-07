@@ -1,4 +1,5 @@
 import { rulesContent } from "../tools/constants";
+import { initialGMIndex } from "../tools/constants";
 
 class Rules {
   constructor(content, id) {
@@ -11,13 +12,13 @@ class Rules {
     const icon = document.createElement('img');
     icon.setAttribute('src', '../static/assets/ui/school.svg');
     rulesHeader.appendChild(icon);
-    const ButtonTittle = document.createElement('span');
-    const text = rulesHeader.appendChild(ButtonTittle);
+    const Content = document.createElement('span');
+    const text = rulesHeader.appendChild(Content);
     text.innerHTML = content;
     container.appendChild(rulesHeader);
     const modeRules = document.createElement('p');
     container.appendChild(modeRules);
-    modeRules.textContent = this.rulesContent[0];
+    modeRules.textContent = this.rulesContent[initialGMIndex];
   }
 
   handleRulesContent(index) {
