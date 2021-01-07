@@ -1,0 +1,52 @@
+@import 'partials/variables';
+@import 'partials/mixins';
+
+$correct-answer: rgb(10, 215, 10);
+
+#answers {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 1em auto;
+}
+
+.answer {
+  font-size: 2rem;
+  font-family: 'Montserrat', sans-serif;
+  background: $white;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  width: 40%;
+  min-width: 10em;
+  padding: 0.5em 2em;
+  margin: 0.3em 0.5em;
+  transition: box-shadow 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    box-shadow: inset 0 0 2.5px rgb(65, 65, 65);
+  }
+  @media (max-width: 640px) {
+    font-size: 1.5rem;
+  }
+}
+
+.correct-answer {
+  background-color: $correct-answer;
+  box-shadow: 0 0 20px $correct-answer;
+  font-weight: 700;
+  &:hover {
+    box-shadow: 0 0 20px $correct-answer;
+  }
+}
+
+.wrong-answer {
+  background-color: $red-background;
+  box-shadow: 0 0 20px $red-shadow;
+  font-weight: 700;
+  &:hover {
+    box-shadow: 0 0 20px $red-shadow;
+  }
+}

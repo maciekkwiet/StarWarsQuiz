@@ -22,7 +22,7 @@ class App {
     this.rules = new Rules('Mode Rules', 'rules');
     this.btns = document.querySelectorAll('.mainMenu > div > button');
     this.mainMenuPanel.addClasses(this.mainMenuPanel.gameModeIndex, this.btns);
-    this.questionAnswers = new QuestionAnswers('#answers', ['odp1', 'odp2', 'odp3'], 'odp1')
+    this.questionAnswers = new QuestionAnswers('#answers', ['Luke Skywalker', 'Jar Jar Binks', 'Padme Amidala', 'Darth Vader'], 'Darth Vader')
     const time = 80;
     this.timer = new Timer(time,'timer-box');
     setInterval(() => {

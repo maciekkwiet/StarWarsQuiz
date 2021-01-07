@@ -1,16 +1,12 @@
 class QuestionAnswers {
   constructor(id, answers, correctAnswer) {
-    this.render(id, answers);
     this.correctAnswer = correctAnswer;
+    this.render(id, answers);
     this.buttons = document.querySelectorAll('#answers > button');
   }
 
   render(id, content) {
     this.renderContent(id, content);
-  }
-
-  check(answer, correctAnswer, index) {
-    this.checkAnswer(answer, correctAnswer, index);
   }
 
   renderContent(id, answers) {
@@ -21,7 +17,7 @@ class QuestionAnswers {
       answerBtn.innerHTML = answer;
       answerBtn.classList.add('answer');
       answerBtn.addEventListener('click', () =>
-        this.check(answer, this.correctAnswer, index),
+        this.checkAnswer(answer, this.correctAnswer, index),
       );
     });
   }
