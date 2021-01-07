@@ -9,14 +9,16 @@ import Timer from './components/Timer';
 import Rules from './components/Rules';
 import Logo from './components/Logo';
 import Playground from './components/Playground';
+import Question from './components/Question';
 import { initialGMIndex } from './tools/constants';
 import { whiteBtnText } from './tools/constants';
+import { playBtnText } from './tools/constants';
 class App {
   constructor(options) {
     this.playground = new Playground('swquiz-app');
     this.logo = new Logo('logo');
     this.box = new Box('box');
-    this.button = new Button('button', 'play the game', 'play-button');
+    this.button = new Button('button', playBtnText, 'play-button');
     const scores = [
       { player: 'Anna', correctAnswers: 10, allAnswers: 20 },
       { player: 'Kamil', correctAnswers: 7, allAnswers: 20 },
@@ -69,8 +71,32 @@ class App {
       btn.addEventListener('click', () => {
         this.mainMenuPanel.btnIndex(index, this.btns);
         this.rules.handleRulesContent(index);
-        this.box.handleBoxContent(index);
+        this.box.handleBoxContent(index, false);
         this.picture.handleExemplaryPicture(index);
+      });
+    });
+
+    this.playBtn = document.querySelector('.play-button');
+    this.playBtn.addEventListener('click', () => {
+      const whiteButton = document.getElementById('whiteButton');
+      const rules = document.getElementById('rules');
+      const rankingBox = document.getElementById('ranking-box');
+      const playButton = document.getElementById('button');
+      const quizPicture = document.getElementsByClassName('quiz__picture')[0];
+
+      /* Make it disapear */
+      whiteButton.classList.add('invisible');
+      rules.style.display = 'none';
+      rankingBox.style.display = 'none';
+      playButton.classList.add('invisible');
+      this.box.handleBoxContent(this.mainMenuPanel.gameModeIndex, true);
+
+      /* Generate question */
+      const question = new Question(this.mainMenuPanel.gameModeIndex, 4);
+      question.getQuestionData().then(() => {
+        /* Change image */
+        const questionData = question.questionData;
+        quizPicture.setAttribute('src', questionData.image);
       });
     });
   }
