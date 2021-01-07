@@ -1,0 +1,47 @@
+.saber {
+    display: flex;
+    margin: 0 auto;
+    padding-left: 1vw;
+    width: 90vw;
+
+    &__container {
+        background: #BCBCBC;
+        border-radius: 12px;
+        box-shadow: 0px 4px 4px $black-shadow;
+        margin: .7% 0;
+        position: relative;
+        right: 1vw;
+        width: 80%;
+    }
+
+    &__handle {
+        width: 20%;
+    }
+
+    &__light {
+        background-color: $white;
+        border-radius: 12px;
+        box-shadow: 10px -5px 15px $light-red, 10px 5px 15px $light-red, 0px 5px 4px $dark-red;
+        height: 100%;
+        transition: width 1s linear;
+        width: 100%;
+
+        &--pulse {
+            animation: pulse 1s linear infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                background-color: $white;
+            }
+
+            50% {
+                background-color: $light-red;
+            }
+
+            100% {
+                background-color: $white;
+            }
+        }
+    }
+}
