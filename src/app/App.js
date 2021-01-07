@@ -7,10 +7,12 @@ import WhiteButton from './components/WhiteButton';
 import Modal from './components/Modal';
 import Timer from './components/Timer';
 import Rules from './components/Rules';
+import Lightsaber from './components/lightsaber';
 import Logo from './components/Logo';
 import Playground from './components/Playground';
 import { initialGMIndex } from "./tools/constants";
 import { whiteBtnText } from "./tools/constants";
+
 class App {
   constructor(options) {
     this.playground = new Playground('swquiz-app');
@@ -50,8 +52,10 @@ class App {
     this.mainMenuPanel.addClasses(this.mainMenuPanel.gameModeIndex, this.btns);
     const time = 80;
     this.timer = new Timer(time,'timer-box');
+    this.lightsaber = new Lightsaber(time, 'saber');
     setInterval(() => {
-      this.timer.decrement()
+      this.timer.decrement();
+      this.lightsaber.progress(time);
     }, 1000);
     this.btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
