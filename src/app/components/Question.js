@@ -60,7 +60,6 @@ class Question {
       .then(() => {
         this._questionData.answers = this._answers;
         this._questionData.rightAnswer = this._rightAnswer;
-        console.log(this._questionData);
       })
       .catch((error) => console.log(error));
   }
