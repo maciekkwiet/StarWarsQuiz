@@ -1,5 +1,5 @@
-import { exemplaryPicture } from "../tools/constants";
-import { initialGMIndex } from "../tools/constants";
+import { exemplaryPicture } from "../constants";
+import { initialGMIndex } from "../constants";
 
 class Picture {
   constructor(id) {
