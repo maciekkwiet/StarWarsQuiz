@@ -4,8 +4,7 @@ class Lightsaber {
         this.render(id);
     }
 
-    handleRender(id) {
-        const container = document.querySelector(`#${id}`);
+    handleRender(container) {
         container.classList.add('saber');
         const pictureSrc = '../static/assets/ui/LightsaberHandle.png';
         const picture = document.createElement('img');
@@ -14,8 +13,7 @@ class Lightsaber {
         container.appendChild(picture);
     }
 
-    saberRender(id) {
-        const container = document.querySelector(`#${id}`);
+    saberRender(container) {
         const saberContainer = document.createElement('div');
         saberContainer.classList.add('saber__container');
         container.appendChild(saberContainer);
@@ -25,8 +23,9 @@ class Lightsaber {
     }
 
     render(id) {
-        this.handleRender(id);
-        this.saberRender(id);
+        const container = document.querySelector(`#${id}`);
+        this.handleRender(container);
+        this.saberRender(container);
     }
 
     progress(time) {
