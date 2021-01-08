@@ -28,7 +28,7 @@ class Question {
 
   _generateUrl(id, isImage) {
     if (!isImage) return 'https://swapi.dev/api/' + this._typeOfQuestion.toLowerCase() + '/' + id + '/';
-    return '../../static/assets/img/modes/' + this._typeOfQuestion.toLowerCase() + '/' + id + '.jpg';
+    return btoa('../../static/assets/img/modes/' + this._typeOfQuestion.toLowerCase() + '/' + id + '.jpg');
   }
 
   async _addAnswer(id) {

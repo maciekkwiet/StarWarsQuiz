@@ -105,7 +105,7 @@ class App {
 
     await question.getQuestionData().then(() => {
       const questionData = question.questionData;
-      quizPicture.setAttribute('src', questionData.image);
+      quizPicture.setAttribute('src', atob(questionData.image));
     });
 
     this.timer = new Timer(this.time,'timer-box');
