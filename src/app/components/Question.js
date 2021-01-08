@@ -34,7 +34,7 @@ class Question {
   async _addAnswer(id) {
     try {
       return await fetch(this._generateUrl(id, false))
-        .then(response => response.json()) ?? -1
+        .then(response => response.ok ? response.json() : -1);
     } catch(e) {
       console.log(e)
     }
@@ -60,6 +60,7 @@ class Question {
       .then(() => {
         this._questionData.answers = this._answers;
         this._questionData.rightAnswer = this._rightAnswer;
+        console.log(this._questionData);
       })
       .catch((error) => console.log(error));
   }
