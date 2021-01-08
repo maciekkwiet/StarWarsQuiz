@@ -15,12 +15,13 @@
 .modalBox {
   position: relative;
   background-color: $white;
-  width: 63%;
-  height: 80%;
+  width: 80%;
   margin: 4% auto;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 16px;
   box-shadow: 0 0 1em red;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
 }
 
 .close {
