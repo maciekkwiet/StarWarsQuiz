@@ -1,6 +1,6 @@
 class QuestionAnswers {
   constructor(id, answers, correctAnswer) {
-    this.correctAnswer = correctAnswer;
+    this.correctAnswer = answers[correctAnswer - 1];
     this.render(id, answers);
     this.buttons = document.querySelectorAll('#answers > button');
   }

@@ -50,7 +50,6 @@ class App {
 
     this.whiteButton.addIcon('../../static/assets/ui/hof.svg');
     this.mainMenuPanel.addClasses(this.mainMenuPanel.gameModeIndex, this.btns);
-    this.questionAnswers = new QuestionAnswers('#answers', ['Luke Skywalker', 'Jar Jar Binks', 'Padme Amidala', 'Darth Vader'], 'Darth Vader')
     const time = 80;
     this.timer = new Timer(time,'timer-box');
     setInterval(() => {
@@ -69,7 +68,6 @@ class App {
     this.whiteBtn.addEventListener('click', () => {
       this.rulesContent()
     });
-
     this.playBtn.addEventListener('click', () => {
       this.renderGame()
     });
@@ -102,17 +100,20 @@ class App {
     const rankingBox = document.getElementById('ranking-box');
     const playButton = document.getElementById('button');
     const quizPicture = document.getElementsByClassName('quiz__picture')[0];
+    const answers = document.getElementById('answers')
 
     whiteButton.style.display = 'none';
     rules.style.display = 'none';
     rankingBox.style.display = 'none';
     playButton.style.display = 'none';
+    answers.style.display = 'block';
 
     this.box.handleBoxContent(this.mainMenuPanel.gameModeIndex, true);
 
     await question.getQuestionData().then(() => {
       const questionData = question.questionData;
       quizPicture.setAttribute('src', questionData.image);
+      this.questionAnswers = new QuestionAnswers('#answers', question._answers, question._rightAnswer);
     });
 
     this.timer = new Timer(this.time,'timer-box');
