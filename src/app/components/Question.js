@@ -28,7 +28,7 @@ class Question {
 
   _generateUrl(id, isImage) {
     if (!isImage) return 'https://swapi.dev/api/' + this._typeOfQuestion.toLowerCase() + '/' + id + '/';
-    return '../../static/assets/img/modes/' + this._typeOfQuestion + '/' + id + '.jpg';
+    return '../../static/assets/img/modes/' + this._typeOfQuestion.toLowerCase() + '/' + id + '.jpg';
   }
 
   async _addAnswer(id) {
@@ -45,7 +45,7 @@ class Question {
     while (i < this._howManyAnswers) {
       let id = this._createRandomInt(this._getMaxId());
       let answer = await this._addAnswer(id);
-      if (await this._addAnswer(id) !== -1 && !this._answers.includes(answer.name)) {
+      if (answer !== -1 && !this._answers.includes(answer.name)) {
         this._answers.push(answer.name);
         if (i == this._rightAnswer - 1) {
           this._questionData.image = this._generateUrl(id, true);
