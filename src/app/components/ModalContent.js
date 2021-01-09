@@ -5,138 +5,21 @@ export default class GameOverScreen {
   
     contentRender(answers,closeWindow, id) {
 
-      const playerCorrectAnswers = answers.reduce(function(a,b) {
-        if (b.playerAnswerIsCorrect === true) {
-          return a + 1;
-        } else {
-          return a;
-        }
-      }, 0);
-      const computerCorrectAnswers = answers.reduce(function(a,b) {
-        if (b.computerAnswerIsCorrect === true) {
-          return a + 1;
-        } else {
-          return a;
-        }
-      }, 0);
+      
 
       const modalBox = document.querySelector(`#${id}`);
-      const gameOverCaption= document.createElement('span');
-      const text = modalBox.appendChild(gameOverCaption);
-      text.innerHTML = "game over";
-      text.classList.add("game-over");
+
+      this.renderHeaders(modalBox,answers);
     
-      const finalComment= document.createElement('p');
-      const comment = modalBox.appendChild(finalComment);
-      comment.innerHTML = this.checkWhoWon(playerCorrectAnswers, computerCorrectAnswers, answers);
-      comment.classList.add("final-comment");
+      
+      this.renderTable(modalBox,answers);
 
-      const tableName= document.createElement('p');
-      const name = modalBox.appendChild(tableName);
-      name.innerHTML = "Detailed answers:";
-      name.classList.add("table-name");
+      this.renderFormArea(modalBox);
     
-      const summary= document.createElement('div');
-      const summaryContent = modalBox.appendChild(summary);
-      summaryContent.classList.add("summary");
-
-      const picture= document.createElement('img');
-      picture.src = "../../static/assets/img/modes/MasterYoda.png";
-      const YodaImg = summary.appendChild(picture);
-      
-      const table= document.createElement('div');
-      const tableContent = summary.appendChild(table);
-      tableContent.classList.add("grid-table");
-
-      const tHeaderColumn1= document.createElement('span');
-      const tHeaderColumn1Content= table.appendChild(tHeaderColumn1);
-      tHeaderColumn1Content.classList.add("table-header");
-
-      const tHeaderColumn2= document.createElement('span');
-      const tHeaderColumn2Content= table.appendChild(tHeaderColumn2);
-      tHeaderColumn2Content.innerHTML = "You";
-      tHeaderColumn2Content.classList.add("table-header");
-
-      const tHeaderColumn3= document.createElement('span');
-      const tHeaderColumn3Content= table.appendChild(tHeaderColumn3);
-      tHeaderColumn3Content.innerHTML = "Computer";
-      tHeaderColumn3Content.classList.add("table-header");
-
-      const tHeaderColumn4= document.createElement('span');
-      const tHeaderColumn4Content= table.appendChild(tHeaderColumn4);
-      tHeaderColumn4Content.innerHTML = "Answer";
-      tHeaderColumn4Content.classList.add("table-header");
-
-
-      for (let i = 0; i < answers.length; i++) {
-        const tableRowColumn1 = document.createElement('span');
-        table.appendChild(tableRowColumn1);
-
-        const question = document.createElement('img');
-        question.src = answers[i].questionPicture;
-        tableRowColumn1.appendChild(question);
-        question.classList.add("img-row")
-
-        const tableRowColumn2 = document.createElement('span');
-        const playerAnswer = table.appendChild(tableRowColumn2);
-        playerAnswer.innerHTML = answers[i].playerAnswer
-        
-        const tableRowColumn3 = document.createElement('span');
-        const computerAnswer = table.appendChild(tableRowColumn3);
-        computerAnswer.innerHTML = answers[i].computerAnswer
-
-        if (answers[i].playerAnswerIsCorrect === true) {
-          playerAnswer.classList.add("correct-answer");
-        } else {
-          playerAnswer.classList.add("incorrect-answer");
-        }
-
-        const tableRowColumn4 = document.createElement('span');
-        const correctAnswer = table.appendChild(tableRowColumn4);
-        correctAnswer.innerHTML = answers[i].correctAnswer
-
-      
-        if (answers[i].computerAnswerIsCorrect === true) {
-          computerAnswer.classList.add("correct-answer");
-        } else {
-          computerAnswer.classList.add("incorrect-answer");
-        }
-      }
-      const formContainer= document.createElement('div');
-      const formDiv = modalBox.appendChild(formContainer);
-      formDiv.classList.add("form-name");
-
-      const form= document.createElement('form');
-      const formWindow = formContainer.appendChild(form);
-      formWindow.classList.add("form-box")
-
-      const input =  document.createElement('input');
-      const inputArea = form.appendChild(input);
-      inputArea.classList.add("input-window")
-      inputArea.setAttribute('type', 'text')
-      inputArea.setAttribute('id', 'inputContent');
-      inputArea.setAttribute('required','');
-      inputArea.required = true;
+      this.renderButton(modalBox, closeWindow, answers);
       
 
-      const description= document.createElement('p');
-      const formDescription = formContainer.appendChild(description);
-      formDescription.innerHTML = 'Please fill your name in order to receive eternal glory in whole Galaxy!'
-      formDescription.classList.add("form-description");
-    
-      const button= document.createElement('button');
-      const modalButton = modalBox.appendChild(button);
-      modalButton.innerHTML = "may the force be with you";
-      modalButton.classList.add("modal-button");
-      
-      const playerScore = `${playerCorrectAnswers}/${(answers.length)}`;
-
-      modalButton.addEventListener("click",function(){
-      if (document.querySelector("form").checkValidity() === true) {
-        closeWindow(input.value, playerScore);
-      } else {
-        document.querySelector("form").reportValidity()}
-      });
+     
 
     }
   
@@ -154,4 +37,145 @@ export default class GameOverScreen {
         return `During 1 minute you and Computer quessed ${player2Answers}/${allAnswers.length} questions.`
       }
     }
+
+    renderHeaders(modalBox,answers){
+
+      this.playerCorrectAnswers = answers.reduce(function(a,b) {
+        if (b.playerAnswerIsCorrect === true) {
+          return a + 1;
+        } else {
+          return a;
+        }
+      }, 0);
+      this.computerCorrectAnswers = answers.reduce(function(a,b) {
+        if (b.computerAnswerIsCorrect === true) {
+          return a + 1;
+        } else {
+          return a;
+        }
+      }, 0);
+      const gameOverCaption= document.createElement('span');
+      modalBox.appendChild(gameOverCaption);
+      gameOverCaption.innerHTML = "game over";
+      gameOverCaption.classList.add("game-over");
+    
+      const finalComment= document.createElement('p');
+      modalBox.appendChild(finalComment);
+      finalComment.innerHTML = this.checkWhoWon(this.playerCorrectAnswers, this.computerCorrectAnswers, answers);
+      finalComment.classList.add("final-comment");
+
+      const tableName= document.createElement('p');
+      modalBox.appendChild(tableName);
+      tableName.innerHTML = "Detailed answers:";
+      tableName.classList.add("table-name");
+    }
+
+   renderTable(modalBox,answers){
+
+    const summary= document.createElement('div');
+    modalBox.appendChild(summary);
+    summary.classList.add("summary");
+
+      const picture= document.createElement('img');
+      picture.src = "../../static/assets/img/modes/MasterYoda.png";
+      summary.appendChild(picture);
+      
+
+   const table= document.createElement('div');
+    const tableContent = summary.appendChild(table);
+    tableContent.classList.add("grid-table");
+
+    const tHeaderColumn1= document.createElement('span');
+    const tHeaderColumn1Content= table.appendChild(tHeaderColumn1);
+    tHeaderColumn1Content.classList.add("table-header");
+
+    const tHeaderColumn2= document.createElement('span');
+    const tHeaderColumn2Content= table.appendChild(tHeaderColumn2);
+    tHeaderColumn2Content.innerHTML = "You";
+    tHeaderColumn2Content.classList.add("table-header");
+
+    const tHeaderColumn3= document.createElement('span');
+    const tHeaderColumn3Content= table.appendChild(tHeaderColumn3);
+    tHeaderColumn3Content.innerHTML = "Computer";
+    tHeaderColumn3Content.classList.add("table-header");
+
+    const tHeaderColumn4= document.createElement('span');
+    const tHeaderColumn4Content= table.appendChild(tHeaderColumn4);
+    tHeaderColumn4Content.innerHTML = "Answer";
+    tHeaderColumn4Content.classList.add("table-header");
+
+
+    for (let i = 0; i < answers.length; i++) {
+      const tableRowColumn1 = document.createElement('span');
+      table.appendChild(tableRowColumn1);
+
+      const question = document.createElement('img');
+      question.src = answers[i].questionPicture;
+      tableRowColumn1.appendChild(question);
+      question.classList.add("img-row")
+
+      const tableRowColumn2 = document.createElement('span');
+      const playerAnswer = table.appendChild(tableRowColumn2);
+      playerAnswer.innerHTML = answers[i].playerAnswer
+      
+      const tableRowColumn3 = document.createElement('span');
+      const computerAnswer = table.appendChild(tableRowColumn3);
+      computerAnswer.innerHTML = answers[i].computerAnswer
+
+      if (answers[i].playerAnswerIsCorrect === true) {
+        playerAnswer.classList.add("correct-answer");
+      } else {
+        playerAnswer.classList.add("incorrect-answer");
+      }
+
+      const tableRowColumn4 = document.createElement('span');
+      const correctAnswer = table.appendChild(tableRowColumn4);
+      correctAnswer.innerHTML = answers[i].correctAnswer
+
+    
+      if (answers[i].computerAnswerIsCorrect === true) {
+        computerAnswer.classList.add("correct-answer");
+      } else {
+        computerAnswer.classList.add("incorrect-answer");
+      }
+    }
+   }
+
+   renderFormArea(modalBox){
+    const formContainer = document.createElement('div');
+    modalBox.appendChild(formContainer);
+    formContainer.classList.add("form-name");
+
+    const form = document.createElement('form');
+    const formWindow = formContainer.appendChild(form);
+    formWindow.classList.add("form-box")
+
+    this.input =  document.createElement('input');
+    const inputArea = form.appendChild(this.input);
+    inputArea.classList.add("input-window")
+    inputArea.setAttribute('type', 'text')
+    inputArea.setAttribute('id', 'inputContent');
+    inputArea.setAttribute('required','');
+    inputArea.required = true;
+    
+
+    const description= document.createElement('p');
+    const formDescription = formContainer.appendChild(description);
+    formDescription.innerHTML = 'Please fill your name in order to receive eternal glory in whole Galaxy!'
+    formDescription.classList.add("form-description");
+   }
+
+   renderButton(modalBox,closeWindow, answers) {
+     const playerScore = `${this.playerCorrectAnswers}/${(answers.length)}`;
+    const button= document.createElement('button');
+    modalBox.appendChild(button);
+    button.innerHTML = "may the force be with you";
+    button.classList.add("modal-button");
+    button.addEventListener("click",() => {
+      if (document.querySelector("form").checkValidity() === true) {
+        closeWindow(this.input.value, playerScore);
+      } else {
+        document.querySelector("form").reportValidity()}
+      });
+   }
   }
