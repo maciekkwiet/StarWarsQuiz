@@ -96,10 +96,17 @@ class App {
     const playButton = document.getElementById('button');
     const quizPicture = document.getElementsByClassName('quiz__picture')[0];
 
+    const saber = document.getElementById('saber');
+    window.innerHeight>window.innerWidth?saber.style.gridArea ="play":null;
+
+    window.addEventListener('resize',()=>{
+      window.innerHeight>window.innerWidth?saber.style.gridArea ="play":saber.style.gridArea ="lightsaber";})
+
     whiteButton.style.display = 'none';
     rules.style.display = 'none';
     rankingBox.style.display = 'none';
     playButton.style.display = 'none';
+
 
     this.box.handleBoxContent(this.mainMenuPanel.gameModeIndex, true);
 
