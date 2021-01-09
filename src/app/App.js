@@ -50,12 +50,6 @@ class App {
 
     this.whiteButton.addIcon('../../static/assets/ui/hof.svg');
     this.mainMenuPanel.addClasses(this.mainMenuPanel.gameModeIndex, this.btns);
-    const time = 80;
-    this.timer = new Timer(time,'timer-box');
-    setInterval(() => {
-      this.timer.decrement()
-    }, 1000);
-
     this.btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
         this.mainMenuPanel.btnIndex(index, this.btns);
@@ -94,19 +88,16 @@ class App {
 
   async renderGame() {
     const question = new Question(this.mainMenuPanel.gameModeIndex, this.numberOfQuestions);
-
     const whiteButton = document.getElementById('whiteButton');
     const rules = document.getElementById('rules');
     const rankingBox = document.getElementById('ranking-box');
     const playButton = document.getElementById('button');
     const quizPicture = document.getElementsByClassName('quiz__picture')[0];
-    const answers = document.getElementById('answers')
 
     whiteButton.style.display = 'none';
     rules.style.display = 'none';
     rankingBox.style.display = 'none';
     playButton.style.display = 'none';
-    answers.style.display = 'block';
 
     this.box.handleBoxContent(this.mainMenuPanel.gameModeIndex, true);
 
