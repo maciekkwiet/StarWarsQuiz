@@ -6,7 +6,7 @@ import { RankingBox } from './components/RankingBox';
 import WhiteButton from './components/WhiteButton';
 import Modal from './components/Modal';
 import Timer from './components/Timer';
-import Lightsaber from './components/Lightsaber';
+import Lightsaber from './components/lightsaber';
 import Rules from './components/Rules';
 import GameOverScreen from './components/ModalContent';
 import Logo from './components/Logo';
