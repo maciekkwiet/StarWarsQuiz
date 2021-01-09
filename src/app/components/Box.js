@@ -1,20 +1,27 @@
+import { boxContent, questionContent } from '../constants';
+import { initialGMIndex } from '../constants';
+
 class Box {
-  constructor(content, id) {
-    this.render(content, id);
+  constructor(id) {
+    this.render(id);
   }
 
-  contentRender(content, id) {
+  contentRender(id) {
     const container = document.querySelector(`#${id}`);
-    const boxContent = document.createElement('span');
-    const text = container.appendChild(boxContent);
-    text.innerHTML = content;
+    const content = document.createElement('span');
+    container.appendChild(content);
+    content.textContent = boxContent[initialGMIndex];
+  }
+  handleBoxContent(index, isQuestion) {
+    const content = document.querySelector('#box span');
+    isQuestion
+      ? (content.textContent = questionContent[index])
+      : (content.textContent = boxContent[index]);
   }
 
-  render(content, id) {
-    this.contentRender(content, id);
+  render(id) {
+    this.contentRender(id);
   }
 }
 
 export default Box;
-
-
