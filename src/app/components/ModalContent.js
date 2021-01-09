@@ -5,8 +5,6 @@ export default class GameOverScreen {
   
     contentRender(answers,closeWindow, id) {
 
-      
-
       const modalBox = document.querySelector(`#${id}`);
 
       this.renderHeaders(modalBox,answers);
