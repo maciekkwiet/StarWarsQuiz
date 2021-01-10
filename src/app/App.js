@@ -50,6 +50,7 @@ class App {
 
     this.whiteButton.addIcon('../../static/assets/ui/hof.svg');
     this.mainMenuPanel.addClasses(this.mainMenuPanel.gameModeIndex, this.btns);
+
     this.btns.forEach((btn, index) => {
       btn.addEventListener('click', () => {
         this.mainMenuPanel.btnIndex(index, this.btns);
@@ -62,6 +63,7 @@ class App {
     this.whiteBtn.addEventListener('click', () => {
       this.rulesContent()
     });
+
     this.playBtn.addEventListener('click', () => {
       this.renderGame()
     });
@@ -88,6 +90,7 @@ class App {
 
   async renderGame() {
     const question = new Question(this.mainMenuPanel.gameModeIndex, this.numberOfQuestions);
+
     const whiteButton = document.getElementById('whiteButton');
     const rules = document.getElementById('rules');
     const rankingBox = document.getElementById('ranking-box');
