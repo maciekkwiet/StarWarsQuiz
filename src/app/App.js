@@ -17,7 +17,8 @@ import {
   whiteBtnText,
   playBtnText,
   scores,
-  mainMenuNames 
+  mainMenuNames,
+  answers,
 } from './constants';
 
 class App {
@@ -31,34 +32,10 @@ class App {
     this.button = new Button('button', playBtnText, 'play-button');
     this.rankingBox = new RankingBox('ranking-box', scores);
     this.modal = new Modal('modalBox');
-
-    const answers = [{
-      questionPicture: "../../static/assets/img/modes/people/1.jpg",
-      playerAnswer: "DarthVader",
-      computerAnswer: "Darth Father",
-      correctAnswer: "Luke Skywalker",
-      playerAnswerIsCorrect: false,
-      computerAnswerIsCorrect: false,
-    },
-    {
-      questionPicture: '../../static/assets/img/modes/people/36.jpg',
-      playerAnswer: "Jar Jar Binks",
-      computerAnswer: "Jar Jar Binks",
-      correctAnswer: "Jar Jar Binks",
-      playerAnswerIsCorrect: true,
-      computerAnswerIsCorrect: true,
-    },
-    ];
     const closeWindow = (name, punctation) => {
-      console.log(name, punctation);
       this.modal.closeModal();
     };
-    this.gameOverScreen = new GameOverScreen(answers, closeWindow, 'modalBox');
-    
-    this.mainMenuPanel = new MainMenu('mainMenu', ['People', 'Vehicles', 'Starships'], 0);
-    this.whiteButton = new WhiteButton('whiteButton', 'Hall of fame', 'whiteButton');
-    this.whiteButton.addIcon('../../static/assets/ui/hof.svg');
-
+    this.gameOverScreen = new GameOverScreen(answers, closeWindow, 'modalBox')
     this.rules = new Rules('Mode Rules', 'rules');
     this.mainMenuPanel = new MainMenu(
       'mainMenu',
