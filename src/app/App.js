@@ -6,7 +6,7 @@ import { RankingBox } from './components/RankingBox';
 import WhiteButton from './components/WhiteButton';
 import Modal from './components/Modal';
 import Timer from './components/Timer';
-import Lightsaber from './components/Lightsaber';
+import Lightsaber from './components/lightsaber';
 import Rules from './components/Rules';
 import QuestionAnswers from './components/QuestionAnswers';
 import Logo from './components/Logo';
@@ -94,17 +94,24 @@ class App {
     const playButton = document.getElementById('button');
     const quizPicture = document.getElementsByClassName('quiz__picture')[0];
 
+    const saber = document.getElementById('saber');
+    window.innerHeight>window.innerWidth?saber.style.gridArea ="play":null;
+
+    window.addEventListener('resize',()=>{
+      window.innerHeight>window.innerWidth?saber.style.gridArea ="play":saber.style.gridArea ="lightsaber";})
+
     whiteButton.style.display = 'none';
     rules.style.display = 'none';
     rankingBox.style.display = 'none';
     playButton.style.display = 'none';
 
+
     this.box.handleBoxContent(this.mainMenuPanel.gameModeIndex, true);
 
     await question.getQuestionData().then(() => {
       const questionData = question.questionData;
-      quizPicture.setAttribute('src', questionData.image);
       this.questionAnswers = new QuestionAnswers('#answers', question._answers, question._rightAnswer);
+      quizPicture.setAttribute('src', atob(questionData.image));
     });
 
     this.timer = new Timer(this.time,'timer-box');
