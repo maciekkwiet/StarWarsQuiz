@@ -26,17 +26,17 @@
       padding-top: 3.3%;
     }
 
-
     &>button {
-      height: 6vh;
       background-color: transparent;
       border: none;
+      color: rgba(0, 0, 0, 0.4);
+      cursor: pointer;
       font-family: Montserrat;
       font-style: normal;
       font-weight: 600;
       font-size: 2.5vh;
-      cursor: pointer;
-      color: rgba(0, 0, 0, 0.4);
+      height: 6vh;
+      outline: none;
 
       @media (orientation:landscape) {
         font-size: 4vh;

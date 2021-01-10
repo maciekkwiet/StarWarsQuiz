@@ -2,36 +2,36 @@
 @import './partials/variables';
 
 #whiteButton {
+  grid-area: whiteb;
   width: 100%;
 
-  grid-area: whiteb;
-
   @media (orientation:landscape) {
+    align-self: flex-end;
     grid-area: whiteb;
     height: 10vh;
     line-height: 10vh;
-
   }
 
   .whiteButton {
-    display: flex;
-    width: 100%;
     align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: font-weight(normal);
-    font-size: 2.5vh;
-    height: 6.5vh;
-    line-height: 6.5vh;
-    text-transform: uppercase;
-    text-align: center;
-    color: $black;
     background: $white;
+    border: none;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
-    border: none;
+    color: $black;
     cursor: pointer;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5vh;
+    font-weight: font-weight(normal);
+    height: 6.5vh;
+    justify-content: center;
+    line-height: 6.5vh;
+    margin-bottom: 10px;
+    outline: none;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
 
     @media(min-width:750px) {
       border-radius: 10px;

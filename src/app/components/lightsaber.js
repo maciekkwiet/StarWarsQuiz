@@ -4,15 +4,16 @@ class Lightsaber {
         this.render(id);
     }
 
-    contentRender(id) {
-        // rozbijmy to na dwie części
-        const container = document.querySelector(`#${id}`);
+    handleRender(container) {
         container.classList.add('saber');
         const pictureSrc = '../static/assets/ui/LightsaberHandle.png';
         const picture = document.createElement('img');
         picture.classList.add('saber__handle');
         picture.setAttribute('src', pictureSrc);
         container.appendChild(picture);
+    }
+
+    saberRender(container) {
         const saberContainer = document.createElement('div');
         saberContainer.classList.add('saber__container');
         container.appendChild(saberContainer);
@@ -22,7 +23,9 @@ class Lightsaber {
     }
 
     render(id) {
-        this.contentRender(id);
+        const container = document.querySelector(`#${id}`);
+        this.handleRender(container);
+        this.saberRender(container);
     }
 
     progress(time) {

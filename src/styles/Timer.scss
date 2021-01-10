@@ -1,9 +1,33 @@
 #timer-box {
+  width: 100%;
+  position: absolute;
+  bottom: 2%;
+  left: 0;
+  text-align: center;
+  z-index: 1;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 800;
-  font-size: 42px;
+  font-size: 3vh;
   line-height: 51px;
   color: rgba(255, 0, 0, 0.8);
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 4px 4px 40px rgba(255, 0, 0, 0.9);
+
+  @media(orientation: landscape) {
+    font-size: 3.5vh;
+    bottom: -3%;
+  }
+
+  @media(orientation: landscape)and(min-width:660px) {
+    font-size: 3.5vh;
+    bottom: 0;
+  }
+
+  @media(orientation: landscape)and(min-width:1025px) {
+    bottom: 1.5%;
+  }
+
+  @media(orientation: landscape)and(min-width:1440px) {
+    bottom: 3%;
+  }
 }
