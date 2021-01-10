@@ -1,8 +1,14 @@
 .saber {
+    grid-area: lightsaber;
+    align-self: center;
     display: flex;
     margin: 0 auto;
     padding-left: 1vw;
     width: 90vw;
+
+    @media(orientation:portrait) {
+        height: 2.5vh;
+    }
 
     &__container {
         background: #BCBCBC;

@@ -6,6 +6,7 @@
   width: 100%;
 
   @media (orientation:landscape) {
+    align-self: flex-end;
     grid-area: whiteb;
     height: 10vh;
     line-height: 10vh;
