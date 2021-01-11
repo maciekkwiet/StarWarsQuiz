@@ -3,53 +3,53 @@
 .modalBox {
     .game-over {
         font-weight: 600;
-        font-size: 42px;
-        line-height: 51px;
+        font-size: 5vh;
+        line-height: 8vh;
         text-align: center;
         text-transform: uppercase;
         display: block;
-        margin-top:3%;
-        @media only screen and (max-width: 1240px) {
-            font-size: 36px;
-        }
+            @media only screen and (max-width: 600px) {
+                font-size: 4vh;
+                margin-bottom: 2%;
+            }
     }
     .final-comment {
         font-weight: 500;
-        font-size: 28px;
-        line-height: 34px;
+        font-size: 3.5vh;
+        line-height: 4vh;
         margin-left: 7%;
         margin-right: 7%;
-        @media only screen and (min-width: 1700px) {
-            font-size: 33px;
+        @media only screen and (max-width: 1200px) {
+            text-align: center;
         }
-            @media only screen and (max-width: 1240px) {
-                font-size: 23px;
-                text-align: center;
+            @media only screen and (max-width: 600px) {
+                font-size: 3vh;
+                margin-bottom: 2%;
             }
-    }
+}
     .table-name { 
         font-weight: 600;
-        font-size: 26px;
-        line-height: 32px;
+        font-size: 4vh;
+        line-height: 4vh;
         margin-left: 35%;
-        margin-top: 5%;
-        margin-bottom: 0;
-        @media only screen and (min-width: 1700px) {
-            font-size: 33px;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        @media only screen and (max-width: 1200px) {
+            width: 80%;
+            margin: 5% auto;
+            display: block;
+            font-size: 3vh;
         }
-            @media only screen and (max-width: 1000px) {
-                width: 80%;
-                margin: 5% auto;
-                display: block;
+            @media only screen and (max-width: 600px) {
+                font-size: 3vh;
+                margin-bottom: 5%;
                 text-align: center;
-                font-size: 23px;
             }
     }
     .summary {
         display: flex;
         justify-content: center;
         align-items: center;
-        
         span {
             text-align: center;
         }
@@ -62,71 +62,60 @@
         .incorrect-answer {
             color: rgba(255, 0, 0, 0.6);
         }
-        img {
-            margin-right: 5%;
+        .yodaPicture {
+            margin-left: 2%;
             width: 30%;
             height: auto;
-            @media only screen and (max-width: 1220px) {
-                margin-left: 0%;
-                width: 27%;
+            @media only screen and (max-width: 1100px) {
+                display: none;
             }
-                @media only screen and (max-width: 1000px) {
-                    display: none;
-                }
         }
     }
     .grid-table {
         display: grid;
-        width: 70%;
-        grid-template-columns: auto 1fr 1fr 1fr;
-        grid-row-gap: 25px;
+        grid-template-columns: 0.5fr 1fr 1fr 1fr;
+        grid-row-gap: 3.5vh;
         font-weight: 600;
-        font-size: 24px;
-        line-height: 29px;
+        font-size: 2.8vh;
         align-items: center;
-        // margin-right: 10%;
-        @media only screen and (min-width: 1700px) {
-            font-size: 33px;
-            grid-row-gap: 70px;
-        }
         .img-row {
-            width: 65px;
-            height: 86px;
+            width: 60%;
+            min-width: 45px ;
+            height: auto;
             border-radius: 16px;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 4px 4px 40px rgba(255, 0, 0, 0.9);
         }
-        @media only screen and (max-width: 1240px) {
-                font-size: 19px;
-            }
-            @media only screen and (max-width: 970px) {
-                width: 90%;
-            }
+        @media only screen and (max-width: 600px) {
+                font-size: 2vh;
+                grid-row-gap: 3vh;
+        }
     }
     .form-name {
         display: flex;
         font-weight: 500;
-        font-size: 28px;
-        line-height: 34px;
+        font-size: 4vh;
+        line-height: 4vh;
         justify-content: center;
         align-items: center;
         margin-left: 3%;
         margin-top: 0px;
         margin-bottom: 1%;
-        @media only screen and (max-width: 750px){
+        @media only screen and (max-width: 750px) {
             flex-direction: column;
             margin-top: 5%;
             margin-bottom: 5%;
         }
         .form-box {
-            margin-right: 2%;
-            width: 80%;
-            @media only screen and (max-width: 1240px){
-                width: 60%;
-                margin-left: 5%;
-            }
-            .input-window {
+            width: 70%;
+            @media only screen and (max-width: 1100px) {
                 width: 100%;
-                height: 80px;
+            }
+                @media only screen and (max-width: 600px) {
+                    width: 80%;
+                }
+            .input-window {
+                width: 95%;
+                height: 9vh;
                 background: $white;
                 border: 4px solid #C4C4C4;
                 box-sizing: border-box;
@@ -134,38 +123,36 @@
                 font-family: Montserrat;
                 font-style: normal;
                 font-weight: normal;
-                font-size: 36px;
-                line-height: 44px;   
+                font-size: 5vh;
+                line-height: 5vh;   
                 @media only screen and (max-width: 1240px) {
-                    height: 60px;
+                    height: 6vh; 
                 }
                     @media only screen and (max-width: 600px) {
                         width: 100%;
-                        }
+                    }
             }
         }
         .form-description {
             font-weight: 500;
-            font-size: 28px;
-            line-height: 34px;
+            font-size: 3.5vh;
+            line-height: 3vh;
             margin: 3% auto;
-            @media only screen and (max-width: 1240px) {
-                font-size: 20px;
+            @media only screen and (max-width: 1200px) {
+                font-size: 2.5vh;
             }
-                @media only screen and (max-width: 840px) {
-                    font-size: 18px;
-                }
-                    @media only screen and (max-width: 750px) {
+                    @media only screen and (max-width: 600px) {
                         width: 80%;
-                        margin: 0 15%;
+                        margin: 3% 15%;
                         text-align: center;
+                        font-size: 3vh;
                     }
         }
     }
     button {
         font-family: 'Montserrat', sans-serif;
-        font-size: 33px;
-        line-height: 44px;
+        font-size: 4vh;
+        line-height: 5vh;
         text-transform: uppercase;
         text-align: center;
         color: white;
@@ -177,8 +164,8 @@
         cursor: pointer;
         width:70%;
         margin: 1% 15%;
-        @media only screen and (max-width: 1240px) {
-            font-size: 26px;
+        @media only screen and (max-width: 1200px) {
+            font-size: 3vh;
         }
     }
 }
