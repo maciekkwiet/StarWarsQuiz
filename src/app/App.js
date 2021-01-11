@@ -11,6 +11,7 @@ import Rules from './components/Rules';
 import Logo from './components/Logo';
 import Playground from './components/Playground';
 import Question from './components/Question';
+import ComputerPlayer from './ComputerPlayer/';
 import { 
   initialGMIndex,
   whiteBtnText,
@@ -66,6 +67,8 @@ class App {
     this.playBtn.addEventListener('click', () => {
       this.renderGame()
     });
+
+    this.computerPlayer = new ComputerPlayer( () => {});
   }
 
   rulesContent() {
