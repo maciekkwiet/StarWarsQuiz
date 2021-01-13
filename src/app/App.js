@@ -8,6 +8,7 @@ import Modal from './components/Modal';
 import Timer from './components/Timer';
 import Lightsaber from './components/lightsaber';
 import Rules from './components/Rules';
+import GameOverScreen from './components/ModalContent';
 import Logo from './components/Logo';
 import Playground from './components/Playground';
 import Question from './components/Question';
@@ -16,7 +17,8 @@ import {
   whiteBtnText,
   playBtnText,
   scores,
-  mainMenuNames 
+  mainMenuNames,
+  answers,
 } from './constants';
 
 class App {
@@ -30,6 +32,10 @@ class App {
     this.button = new Button('button', playBtnText, 'play-button');
     this.rankingBox = new RankingBox('ranking-box', scores);
     this.modal = new Modal('modalBox');
+    const closeWindow = (name, punctation) => {
+      this.modal.closeModal();
+    };
+    this.gameOverScreen = new GameOverScreen(answers, closeWindow, 'modalBox')
     this.rules = new Rules('Mode Rules', 'rules');
     this.mainMenuPanel = new MainMenu(
       'mainMenu',

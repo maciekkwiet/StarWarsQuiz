@@ -1,0 +1,171 @@
+@import 'partials/variables';
+
+.modalBox {
+    .game-over {
+        font-weight: 600;
+        font-size: 5vh;
+        line-height: 8vh;
+        text-align: center;
+        text-transform: uppercase;
+        display: block;
+            @media only screen and (max-width: 600px) {
+                font-size: 4vh;
+                margin-bottom: 2%;
+            }
+    }
+    .final-comment {
+        font-weight: 500;
+        font-size: 3.5vh;
+        line-height: 4vh;
+        margin-left: 7%;
+        margin-right: 7%;
+        @media only screen and (max-width: 1200px) {
+            text-align: center;
+        }
+            @media only screen and (max-width: 600px) {
+                font-size: 3vh;
+                margin-bottom: 2%;
+            }
+}
+    .table-name { 
+        font-weight: 600;
+        font-size: 4vh;
+        line-height: 4vh;
+        margin-left: 35%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        @media only screen and (max-width: 1200px) {
+            width: 80%;
+            margin: 5% auto;
+            display: block;
+            font-size: 3vh;
+        }
+            @media only screen and (max-width: 600px) {
+                font-size: 3vh;
+                margin-bottom: 5%;
+                text-align: center;
+            }
+    }
+    .summary {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+            text-align: center;
+        }
+        .table-header {
+            color: rgba(0, 0, 0, 0.6);
+        }
+        .correct-answer {
+            color: rgba(87, 181, 13, 0.6);
+        }
+        .incorrect-answer {
+            color: rgba(255, 0, 0, 0.6);
+        }
+        .yodaPicture {
+            margin-left: 2%;
+            width: 30%;
+            height: auto;
+            @media only screen and (max-width: 1100px) {
+                display: none;
+            }
+        }
+    }
+    .grid-table {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 1fr 1fr;
+        grid-row-gap: 3.5vh;
+        font-weight: 600;
+        font-size: 2.8vh;
+        align-items: center;
+        .img-row {
+            width: 60%;
+            min-width: 45px ;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 4px 4px 40px rgba(255, 0, 0, 0.9);
+        }
+        @media only screen and (max-width: 600px) {
+                font-size: 2vh;
+                grid-row-gap: 3vh;
+        }
+    }
+    .form-name {
+        display: flex;
+        font-weight: 500;
+        font-size: 4vh;
+        line-height: 4vh;
+        justify-content: center;
+        align-items: center;
+        margin-left: 3%;
+        margin-top: 0px;
+        margin-bottom: 1%;
+        @media only screen and (max-width: 750px) {
+            flex-direction: column;
+            margin-top: 5%;
+            margin-bottom: 5%;
+        }
+        .form-box {
+            width: 70%;
+            @media only screen and (max-width: 1100px) {
+                width: 100%;
+            }
+                @media only screen and (max-width: 600px) {
+                    width: 80%;
+                }
+            .input-window {
+                width: 95%;
+                height: 9vh;
+                background: $white;
+                border: 4px solid #C4C4C4;
+                box-sizing: border-box;
+                border-radius: 8px;
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 5vh;
+                line-height: 5vh;   
+                @media only screen and (max-width: 1240px) {
+                    height: 6vh; 
+                }
+                    @media only screen and (max-width: 600px) {
+                        width: 100%;
+                    }
+            }
+        }
+        .form-description {
+            font-weight: 500;
+            font-size: 3.5vh;
+            line-height: 3vh;
+            margin: 3% auto;
+            @media only screen and (max-width: 1200px) {
+                font-size: 2.5vh;
+            }
+                    @media only screen and (max-width: 600px) {
+                        width: 80%;
+                        margin: 3% 15%;
+                        text-align: center;
+                        font-size: 3vh;
+                    }
+        }
+    }
+    button {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 4vh;
+        line-height: 5vh;
+        text-transform: uppercase;
+        text-align: center;
+        color: white;
+        background-color: $red-background;
+        outline: none;
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0 0 1em red;;
+        cursor: pointer;
+        width:70%;
+        margin: 1% 15%;
+        @media only screen and (max-width: 1200px) {
+            font-size: 3vh;
+        }
+    }
+}
