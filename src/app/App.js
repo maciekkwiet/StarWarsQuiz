@@ -98,6 +98,7 @@ class App {
     const gameModeBtns = document.querySelectorAll('.mainMenu > div > button');
 
     gameModeBtns.forEach(button => {
+      button.style.cursor = 'default'
       let newEl = button.cloneNode(true);
       button.parentNode.replaceChild(newEl, button);
     })
