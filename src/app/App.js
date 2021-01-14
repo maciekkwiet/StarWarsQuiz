@@ -104,7 +104,14 @@ class App {
     const rankingBox = document.getElementById('ranking-box');
     const playButton = document.getElementById('button');
     const quizPicture = document.getElementsByClassName('quiz__picture')[0];
+    const gameModeBtns = document.querySelectorAll('.mainMenu > div > button');
 
+    gameModeBtns.forEach(button => {
+      button.style.cursor = 'default'
+      let newEl = button.cloneNode(true);
+      button.parentNode.replaceChild(newEl, button);
+    })
+    
     const saber = document.getElementById('saber');
     window.innerHeight>window.innerWidth?saber.style.gridArea ="play":null;
 
