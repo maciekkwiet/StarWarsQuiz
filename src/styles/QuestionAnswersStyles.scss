@@ -1,0 +1,51 @@
+@import 'partials/variables';
+
+$correct-answer: rgb(10, 215, 10);
+
+#answers {
+  grid-area: rules;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+  width: 100%;
+  padding: 0 10px;
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    grid-gap: 0.5em;
+  }
+
+  .answer {
+    font-size: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    background: $white;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    transition: box-shadow 0.2s ease;
+    cursor: pointer;
+    &:not(.wrong-answer):not(.correct-answer):hover {
+      box-shadow: inset 0 0 7.5px #000;
+    }
+    @media (max-width: 940px) {
+      font-size: 1.5rem;
+    }
+    @media (max-width: 640px) {
+      font-size: 1.2em;
+    }
+  }
+
+  .correct-answer,
+  .wrong-answer {
+    font-weight: 700;
+  }
+
+  .correct-answer {
+    background-color: $correct-answer;
+    box-shadow: 0 0 20px $correct-answer;
+  }
+
+  .wrong-answer {
+    background-color: $red-background;
+    box-shadow: 0 0 20px $red-shadow;
+  }
+}

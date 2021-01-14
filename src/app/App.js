@@ -8,6 +8,7 @@ import Modal from './components/Modal';
 import Timer from './components/Timer';
 import Lightsaber from './components/lightsaber';
 import Rules from './components/Rules';
+import QuestionAnswers from './components/QuestionAnswers';
 import GameOverScreen from './components/ModalContent';
 import Logo from './components/Logo';
 import Playground from './components/Playground';
@@ -128,6 +129,7 @@ class App {
 
     await question.getQuestionData().then(() => {
       const questionData = question.questionData;
+      this.questionAnswers = new QuestionAnswers('#answers', question._answers, question._rightAnswer);
       quizPicture.setAttribute('src', atob(questionData.image));
     });
 
