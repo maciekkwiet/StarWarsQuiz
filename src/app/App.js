@@ -9,15 +9,18 @@ import Timer from './components/Timer';
 import Lightsaber from './components/lightsaber';
 import Rules from './components/Rules';
 import QuestionAnswers from './components/QuestionAnswers';
+import GameOverScreen from './components/ModalContent';
 import Logo from './components/Logo';
 import Playground from './components/Playground';
 import Question from './components/Question';
-import {
+import ComputerPlayer from './ComputerPlayer/';
+import { 
   initialGMIndex,
   whiteBtnText,
   playBtnText,
   scores,
   mainMenuNames,
+  answers,
 } from './constants';
 
 class App {
@@ -31,6 +34,10 @@ class App {
     this.button = new Button('button', playBtnText, 'play-button');
     this.rankingBox = new RankingBox('ranking-box', scores);
     this.modal = new Modal('modalBox');
+    const closeWindow = (name, punctation) => {
+      this.modal.closeModal();
+    };
+    this.gameOverScreen = new GameOverScreen(answers, closeWindow, 'modalBox')
     this.rules = new Rules('Mode Rules', 'rules');
     this.mainMenuPanel = new MainMenu(
       'mainMenu',
@@ -67,6 +74,8 @@ class App {
     this.playBtn.addEventListener('click', () => {
       this.renderGame();
     });
+
+    this.computerPlayer = new ComputerPlayer( () => {});
   }
 
   rulesContent() {
@@ -128,6 +137,13 @@ class App {
     const rankingBox = document.getElementById('ranking-box');
     const playButton = document.getElementById('button');
     const modalBox = document.getElementById('modal');
+    const gameModeBtns = document.querySelectorAll('.mainMenu > div > button');
+
+    gameModeBtns.forEach(button => {
+      button.style.cursor = 'default'
+      let newEl = button.cloneNode(true);
+      button.parentNode.replaceChild(newEl, button);
+    })
 
     const saber = document.getElementById('saber');
     window.innerHeight > window.innerWidth

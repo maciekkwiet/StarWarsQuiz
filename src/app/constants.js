@@ -35,3 +35,36 @@ export const scores = [
 ];
 
 export const mainMenuNames = ['People', 'Vehicles', 'Starships']
+
+export const answers = [{
+  questionPicture: "../../static/assets/img/modes/people/1.jpg",
+  playerAnswer: "DarthVader",
+  computerAnswer: "Darth Father",
+  correctAnswer: "Luke Skywalker",
+  playerAnswerIsCorrect: false,
+  computerAnswerIsCorrect: false,
+},
+{
+  questionPicture: '../../static/assets/img/modes/people/36.jpg',
+  playerAnswer: "Jar Jar Binks",
+  computerAnswer: "Jar Jar Binks",
+  correctAnswer: "Jar Jar Binks",
+  playerAnswerIsCorrect: true,
+  computerAnswerIsCorrect: true,
+},
+];
+
+export const TypesOfQuestion = {
+  People: {
+    maxId: 88,
+    excluded: [17]
+  },
+  Starships: {
+    maxId: 48,
+    excluded: [1, 2, 3, 4, 6, 7, 8, 14, 16, 17, 18, 19, 20, 24, 25, 26, 30, 32, 33, 34, 35, 36, 37, 38, 42, 44, 45, 46]
+  },
+  Vehicles: {
+    maxId: 42,
+    excluded: [1, 2, 3, 5, 9, 10, 11, 12, 13, 15, 17, 21, 22, 23, 27, 28, 29, 31, 32, 39, 40, 41]
+  }
+};
