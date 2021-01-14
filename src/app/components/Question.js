@@ -1,4 +1,4 @@
-import {mainMenuNames} from '../constants'
+import {mainMenuNames, TypesOfQuestion} from '../constants'
 
 class Question {
   constructor(typeOfQuestionIndex, howManyAnswers) {
@@ -14,12 +14,7 @@ class Question {
   }
 
   _getMaxId() {
-    const TypesOfQuestion = {
-      People: 82,
-      Starships: 36,
-      Vehicles: 39,
-    };
-    return TypesOfQuestion[this._typeOfQuestion];
+    return TypesOfQuestion[this._typeOfQuestion].maxId;
   }
 
   _createRandomInt(max) {
@@ -43,7 +38,11 @@ class Question {
   async _generateAnswers() {
     let i = 0;
     while (i < this._howManyAnswers) {
-      let id = this._createRandomInt(this._getMaxId());
+      let id;
+      do {
+        id = this._createRandomInt(this._getMaxId());
+
+      } while (TypesOfQuestion[this._typeOfQuestion].excluded.includes(id));
       let answer = await this._addAnswer(id);
       if (answer !== -1 && !this._answers.includes(answer.name)) {
         this._answers.push(answer.name);
