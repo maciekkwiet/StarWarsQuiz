@@ -12,6 +12,7 @@ import GameOverScreen from './components/ModalContent';
 import Logo from './components/Logo';
 import Playground from './components/Playground';
 import Question from './components/Question';
+import { LocalStorageRanking } from './components/LocalStorage';
 import { 
   initialGMIndex,
   whiteBtnText,
@@ -32,8 +33,9 @@ class App {
     this.button = new Button('button', playBtnText, 'play-button');
     this.rankingBox = new RankingBox('ranking-box', scores);
     this.modal = new Modal('modalBox');
-    const closeWindow = (name, punctation) => {
+    const closeWindow = (gameModeIndex,playerCorrectAnswers,playerAllAnswers,playerName) => {
       this.modal.closeModal();
+      LocalStorageRanking(gameModeIndex,playerCorrectAnswers,playerAllAnswers,playerName);
     };
     this.gameOverScreen = new GameOverScreen(answers, closeWindow, 'modalBox')
     this.rules = new Rules('Mode Rules', 'rules');
