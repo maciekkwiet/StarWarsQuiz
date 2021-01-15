@@ -1,18 +1,17 @@
 const compareNumbers = (a,b)=>b.score-a.score;
 
-export const GetLocatStorage=(gameModeIndex)=>JSON.parse(localStorage.getItem(gameModeIndex))||[];
-export const SetLocatStorage=(gameModeIndex,playerName,playerCorrectAnswers,playerAllAnswers)=>{
-  if(ScoreCheck(gameModeIndex)){
-    const actualLocalStorage = GetLocatStorage(gameModeIndex).slice(0,2);
-    let newPlayer = {name:playerName, correctAnswers:playerCorrectAnswers,allAnswers:playerAllAnswers}
-    actualLocalStorage.push(newPlayer);
-    actualLocalStorage.forEach(el => el.score = el.correctAnswers/el.allAnswers);
-    let newHighScores =actualLocalStorage.sort(compareNumbers);
-    localStorage.setItem(gameModeIndex,JSON.stringify(newHighScores));
-  }
+export const getLocalStorage = (gameModeIndex)=>JSON.parse(localStorage.getItem(gameModeIndex))||[];
+
+export const setLocalStorage = (actualLocalStorage, gameModeIndex, playerName, playerCorrectAnswers, playerAllAnswers)=>{
+  const newLocalStorage = actualLocalStorage.slice(0,2);
+  const newPlayer = {name:playerName, correctAnswers:playerCorrectAnswers, allAnswers:playerAllAnswers}
+  newLocalStorage.push(newPlayer);
+  newLocalStorage.forEach(el => el.score = el.correctAnswers/el.allAnswers);
+  const newHighScores = newLocalStorage.sort(compareNumbers);
+  localStorage.setItem(gameModeIndex, JSON.stringify(newHighScores));
 };
-export const ScoreCheck=(gameModeIndex,playerCorrectAnswers,playerAllAnswers)=>{
-  const actualLocalStorage = GetLocatStorage(gameModeIndex);
-  const lastScores =actualLocalStorage[actualLocalStorage.lenght-1];
-  return playerCorrectAnswers/playerAllAnswers>lastScores.correctAnswers/lastScores.allAnswers;
+
+export const scoreCheck=(actualLocalStorage, playerCorrectAnswers, playerAllAnswers)=>{
+  const lastScores = actualLocalStorage[actualLocalStorage.lenght-1];
+  return playerCorrectAnswers / playerAllAnswers > lastScores.correctAnswers / lastScores.allAnswers;
 };
