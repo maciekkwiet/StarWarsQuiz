@@ -24,9 +24,9 @@ import {
 } from './constants';
 
 class App {
-  constructor(options) {
-    this.time = 80;
-    this.numberOfQuestions = 4;
+  constructor(options, time, numberOfQuestions) {
+    this.time = time;
+    this.numberOfQuestions = numberOfQuestions;
 
     this.playground = new Playground('swquiz-app');
     this.logo = new Logo('logo');
