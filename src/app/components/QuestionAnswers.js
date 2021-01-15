@@ -2,8 +2,6 @@ class QuestionAnswers {
   constructor(id, answers, correctAnswer) {
     this.correctAnswer = answers[correctAnswer - 1];
     this.render(id, answers);
-    this.score = 0;
-    this.questionsAmount = 0;
   }
 
   render(id, content) {
@@ -12,7 +10,7 @@ class QuestionAnswers {
 
   renderContent(id, answers) {
     const container = document.querySelector(`${id}`);
-    answers.forEach((answer, index) => {
+    answers.forEach((answer) => {
       const btn = document.createElement('button');
       const answerBtn = container.appendChild(btn);
       answerBtn.innerHTML = answer;
