@@ -8,7 +8,6 @@ class Picture {
 
   contentRender(id) {
     const container = document.querySelector(`#${id}`);
-    const pictureSrc = '../static/assets/img/modes/people/1.jpg';
     const picture = document.createElement('img');
     picture.classList.add('quiz__picture');
     picture.setAttribute('src', exemplaryPicture[initialGMIndex]);

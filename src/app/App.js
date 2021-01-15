@@ -25,37 +25,47 @@ import {
 
 class App {
   constructor(options) {
-    this.time = 80;
+    this.time = 10;
     this.numberOfQuestions = 4;
+    this.score = 0;
+    this.questionsAmount = 0;
+
+    this.renderMainVievComponents()
+  }
+
+  renderMainVievComponents() {
 
     this.playground = new Playground('swquiz-app');
     this.logo = new Logo('logo');
     this.box = new Box('box');
+    this.modal = new Modal('modalBox');
     this.button = new Button('button', playBtnText, 'play-button');
     this.rankingBox = new RankingBox('ranking-box', scores);
     this.modal = new Modal('modalBox');
-    const closeWindow = (name, punctation) => {
-      this.modal.closeModal();
-    };
-    this.gameOverScreen = new GameOverScreen(answers, closeWindow, 'modalBox')
+    this.gameOverScreen = new GameOverScreen(answers, this.closeWindow, 'modalBox')
     this.rules = new Rules('Mode Rules', 'rules');
+    this.picture = new Picture('picture');
     this.mainMenuPanel = new MainMenu(
       'mainMenu',
       mainMenuNames,
       initialGMIndex,
     );
-    this.picture = new Picture('picture');
     this.whiteButton = new WhiteButton(
       'whiteButton',
       whiteBtnText[0],
       'whiteButton',
     );
 
+    this.setMainVievLogic()
+  }
+
+  setMainVievLogic() {
+    this.computerPlayer = new ComputerPlayer( () => {});
+
     this.whiteBtn = document.querySelector('.whiteButton');
     this.btns = document.querySelectorAll('.mainMenu > div > button');
     this.playBtn = document.querySelector('.play-button');
 
-    this.whiteButton.addIcon('../../static/assets/ui/hof.svg');
     this.mainMenuPanel.addClasses(this.mainMenuPanel.gameModeIndex, this.btns);
 
     this.btns.forEach((btn, index) => {
@@ -74,9 +84,11 @@ class App {
     this.playBtn.addEventListener('click', () => {
       this.renderGame();
     });
-
-    this.computerPlayer = new ComputerPlayer( () => {});
   }
+
+  closeWindow() {
+    this.modal.closeModal();
+  };
 
   rulesContent() {
     const whiteBtnContent = document.querySelector('.whiteButton span');
@@ -107,7 +119,6 @@ class App {
     const answerBtns = document.querySelectorAll('#answers > button');
 
     await question.getQuestionData().then(() => {
-      const questionData = question.questionData;
       if (!this.questionAnswers) {
         this.questionAnswers = new QuestionAnswers(
           '#answers',
@@ -119,6 +130,8 @@ class App {
       this.questionAnswers.correctAnswer = this.questionAnswers.answers[
         question._rightAnswer - 1
       ];
+
+      //to refactor
       answerBtns.forEach((btn) => {
         btn.classList.remove('correct-answer');
         btn.classList.remove('wrong-answer');
@@ -127,11 +140,14 @@ class App {
         answerBtnsCN[i].textContent = question._answers[i];
       }
 
-      quizPicture.setAttribute('src', atob(questionData.image));
+      quizPicture.setAttribute('src', atob(question.questionData.image));
     });
   }
 
   async renderGame() {
+    this.timer = new Timer(this.time, 'timer-box');
+    this.lightsaber = new Lightsaber(this.time, 'saber');
+
     const whiteButton = document.getElementById('whiteButton');
     const rules = document.getElementById('rules');
     const rankingBox = document.getElementById('ranking-box');
@@ -146,9 +162,7 @@ class App {
     })
 
     const saber = document.getElementById('saber');
-    window.innerHeight > window.innerWidth
-      ? (saber.style.gridArea = 'play')
-      : null;
+    if(window.innerHeight > window.innerWidth) (saber.style.gridArea = 'play')
 
     window.addEventListener('resize', () => {
       window.innerHeight > window.innerWidth
@@ -166,26 +180,21 @@ class App {
     await this.generateQuestion().then(() => {
       const answerBtns = document.querySelectorAll('#answers > button');
 
+      // to refactor
       answerBtns.forEach((btn) =>
         btn.addEventListener('click', () => {
           if (btn.textContent === this.questionAnswers.correctAnswer) {
-            this.questionAnswers.score++;
+            this.score++;
             btn.classList.add('correct-answer');
           } else {
             btn.classList.add('wrong-answer');
           }
 
-          this.questionAnswers.questionsAmount++;
-
-          setTimeout(() => {
-            this.generateQuestion();
-          }, 500);
+          this.questionsAmount++;
+          this.generateQuestion();
         }),
       );
     });
-
-    this.timer = new Timer(this.time, 'timer-box');
-    this.lightsaber = new Lightsaber(this.time, 'saber');
 
     setInterval(() => {
       this.timer.decrement();
