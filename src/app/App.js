@@ -68,11 +68,11 @@ class App {
     });
 
     this.whiteBtn.addEventListener('click', () => {
-      this.rulesContent()
+      this.rulesContent();
     });
 
     this.playBtn.addEventListener('click', () => {
-      this.renderGame()
+      this.renderGame();
     });
 
     this.computerPlayer = new ComputerPlayer( () => {});
@@ -97,14 +97,46 @@ class App {
     }
   }
 
-  async renderGame() {
-    const question = new Question(this.mainMenuPanel.gameModeIndex, this.numberOfQuestions);
+  async generateQuestion() {
+    const question = new Question(
+      this.mainMenuPanel.gameModeIndex,
+      this.numberOfQuestions,
+    );
+    const quizPicture = document.getElementsByClassName('quiz__picture')[0];
+    const answerBtnsCN = document.getElementById('answers').childNodes;
+    const answerBtns = document.querySelectorAll('#answers > button');
 
+    await question.getQuestionData().then(() => {
+      const questionData = question.questionData;
+      if (!this.questionAnswers) {
+        this.questionAnswers = new QuestionAnswers(
+          '#answers',
+          question._answers,
+          question._rightAnswer,
+        );
+      }
+      this.questionAnswers.answers = question._answers;
+      this.questionAnswers.correctAnswer = this.questionAnswers.answers[
+        question._rightAnswer - 1
+      ];
+      answerBtns.forEach((btn) => {
+        btn.classList.remove('correct-answer');
+        btn.classList.remove('wrong-answer');
+      });
+      for (let i = 0; i < question._answers.length; i++) {
+        answerBtnsCN[i].textContent = question._answers[i];
+      }
+
+      quizPicture.setAttribute('src', atob(questionData.image));
+    });
+  }
+
+  async renderGame() {
     const whiteButton = document.getElementById('whiteButton');
     const rules = document.getElementById('rules');
     const rankingBox = document.getElementById('ranking-box');
     const playButton = document.getElementById('button');
-    const quizPicture = document.getElementsByClassName('quiz__picture')[0];
+    const modalBox = document.getElementById('modal');
     const gameModeBtns = document.querySelectorAll('.mainMenu > div > button');
 
     gameModeBtns.forEach(button => {
@@ -112,37 +144,60 @@ class App {
       let newEl = button.cloneNode(true);
       button.parentNode.replaceChild(newEl, button);
     })
-    
-    const saber = document.getElementById('saber');
-    window.innerHeight>window.innerWidth?saber.style.gridArea ="play":null;
 
-    window.addEventListener('resize',()=>{
-      window.innerHeight>window.innerWidth?saber.style.gridArea ="play":saber.style.gridArea ="lightsaber";})
+    const saber = document.getElementById('saber');
+    window.innerHeight > window.innerWidth
+      ? (saber.style.gridArea = 'play')
+      : null;
+
+    window.addEventListener('resize', () => {
+      window.innerHeight > window.innerWidth
+        ? (saber.style.gridArea = 'play')
+        : (saber.style.gridArea = 'lightsaber');
+    });
 
     whiteButton.style.display = 'none';
     rules.style.display = 'none';
     rankingBox.style.display = 'none';
     playButton.style.display = 'none';
 
-
     this.box.handleBoxContent(this.mainMenuPanel.gameModeIndex, true);
 
-    await question.getQuestionData().then(() => {
-      const questionData = question.questionData;
-      this.questionAnswers = new QuestionAnswers('#answers', question._answers, question._rightAnswer);
-      quizPicture.setAttribute('src', atob(questionData.image));
+    await this.generateQuestion().then(() => {
+      const answerBtns = document.querySelectorAll('#answers > button');
+
+      answerBtns.forEach((btn) =>
+        btn.addEventListener('click', () => {
+          if (btn.textContent === this.questionAnswers.correctAnswer) {
+            this.questionAnswers.score++;
+            btn.classList.add('correct-answer');
+          } else {
+            btn.classList.add('wrong-answer');
+          }
+
+          this.questionAnswers.questionsAmount++;
+
+          setTimeout(() => {
+            this.generateQuestion();
+          }, 500);
+        }),
+      );
     });
 
-    this.timer = new Timer(this.time,'timer-box');
+    this.timer = new Timer(this.time, 'timer-box');
     this.lightsaber = new Lightsaber(this.time, 'saber');
 
     setInterval(() => {
       this.timer.decrement();
       this.lightsaber.progress(this.time);
     }, 1000);
+
+    setTimeout(() => {
+      modalBox.style.display = 'block';
+    }, this.timer.time * 1000);
   }
-  
-  isAnswerCorrect (correctAnswer, playerAnswer) {
+
+  isAnswerCorrect(correctAnswer, playerAnswer) {
     return correctAnswer === playerAnswer;
   }
 }
