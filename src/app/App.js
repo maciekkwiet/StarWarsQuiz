@@ -13,7 +13,7 @@ import GameOverScreen from './components/ModalContent';
 import Logo from './components/Logo';
 import Playground from './components/Playground';
 import Question from './components/Question';
-import { getLocalStorage, setLocalStorage, scoreCheck } from './components/LocalStorage';
+import { getLocalStorage, setLocalStorage, scoreCheck } from './LocalStorage';
 import ComputerPlayer from './ComputerPlayer/';
 import { 
   initialGMIndex,
@@ -26,7 +26,7 @@ import {
 
 class App {
   constructor(options) {
-    this.time = 80;
+    this.time = 30;
     this.numberOfQuestions = 4;
 
     this.playground = new Playground('swquiz-app');
@@ -35,12 +35,8 @@ class App {
     this.button = new Button('button', playBtnText, 'play-button');
     this.rankingBox = new RankingBox('ranking-box', scores);
     this.modal = new Modal('modalBox');
-    const closeWindow = (gameModeIndex,playerCorrectAnswers,playerAllAnswers,playerName) => {
+    const closeWindow = () => {
       this.modal.closeModal();
-      const actualLocalStorage = getLocalStorage(gameModeIndex)
-      if(scoreCheck(actualLocalStorage, playerCorrectAnswers, playerAllAnswers)) {
-        setLocalStorage(actualLocalStorage, gameModeIndex, playerName, playerCorrectAnswers, playerAllAnswers)
-      }
     };
     this.gameOverScreen = new GameOverScreen(answers, closeWindow, 'modalBox')
     this.rules = new Rules('Mode Rules', 'rules');
@@ -81,6 +77,12 @@ class App {
     });
 
     this.computerPlayer = new ComputerPlayer( () => {});
+
+    // do zmiany jak będziemy pobierać wartości z modala po zakończeniu rozgrywki, na pewno też nie w tym miejscu
+    const actualLocalStorage = getLocalStorage(this.mainMenuPanel.gameModeIndex)
+    if(scoreCheck(actualLocalStorage, 8, 8)) {
+      setLocalStorage(actualLocalStorage, this.mainMenuPanel.gameModeIndex, 'playerName', 6, 8)
+    }
   }
 
   rulesContent() {
