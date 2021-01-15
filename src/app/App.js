@@ -165,21 +165,34 @@ class App {
 
     await this.generateQuestion().then(() => {
       const answerBtns = document.querySelectorAll('#answers > button');
+      let gameOn = true;
+      
 
       answerBtns.forEach((btn) =>
         btn.addEventListener('click', () => {
-          if (btn.textContent === this.questionAnswers.correctAnswer) {
-            this.questionAnswers.score++;
-            btn.classList.add('correct-answer');
-          } else {
-            btn.classList.add('wrong-answer');
+          if(gameOn) {
+            gameOn = false;
+            if (btn.textContent === this.questionAnswers.correctAnswer) {
+              this.questionAnswers.score++;
+              btn.classList.add('correct-answer');
+            } else {
+              btn.classList.add('wrong-answer');
+            }
+            this.questionAnswers.questionsAmount++;
+  
+            setTimeout(() => {
+              for(let i = 0; i < answerBtns.length; i++) {
+                if(answerBtns[i].textContent === this.questionAnswers.correctAnswer) {
+                  answerBtns[i].classList.add('correct-answer');
+                }
+              }
+            }, 300);
+   
+            setTimeout(() => {
+              this.generateQuestion();
+              gameOn = true;
+            }, 1000);
           }
-
-          this.questionAnswers.questionsAmount++;
-
-          setTimeout(() => {
-            this.generateQuestion();
-          }, 500);
         }),
       );
     });
