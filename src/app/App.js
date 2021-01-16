@@ -41,7 +41,6 @@ class App {
     this.button = new Button('button', playBtnText, 'play-button');
     this.rankingBox = new RankingBox('ranking-box', scores);
     this.modal = new Modal('modalBox');
-    this.gameOverScreen = new GameOverScreen(answers, this.closeWindow, 'modalBox')
     this.rules = new Rules('Mode Rules', 'rules');
     this.picture = new Picture('picture');
     this.mainMenuPanel = new MainMenu(
@@ -134,6 +133,7 @@ class App {
         );
       }
       this.questionAnswers.answers = question._answers;
+      this.questionAnswers.picture = atob(question.questionData.image);
       this.questionAnswers.correctAnswer = this.questionAnswers.answers[
         question._rightAnswer - 1
       ];
@@ -184,23 +184,38 @@ class App {
 
     this.box.handleBoxContent(this.mainMenuPanel.gameModeIndex, true);
 
+    const gamePlaySummary = [];
+
     await this.generateQuestion().then(() => {
-      const answerBtns = document.querySelectorAll('#answers > button');
+      const answerBtns = document.querySelectorAll('#answers > button')
       let gameOn = true;
-      
+      gamePlaySummary.length = 0;
 
       // to refactor
       answerBtns.forEach((btn) =>
         btn.addEventListener('click', () => {
           if(gameOn) {
+
+            const roundSummary = {
+              playerAnswer: btn.textContent,
+              correctAnswer: this.questionAnswers.correctAnswer,
+              questionPicture: this.questionAnswers.picture,
+              computerAnswer: this.questionAnswers.correctAnswer,
+              computerAnswerIsCorrect: true,
+            }
+
             gameOn = false;
             if (btn.textContent === this.questionAnswers.correctAnswer) {
               this.questionAnswers.score++;
               btn.classList.add('correct-answer');
+              roundSummary.playerAnswerIsCorrect = true;
             } else {
               btn.classList.add('wrong-answer');
+              roundSummary.playerAnswerIsCorrect = false;
             }
             this.questionAnswers.questionsAmount++;
+
+            gamePlaySummary.push(roundSummary);
   
             setTimeout(() => {
               for(let i = 0; i < answerBtns.length; i++) {
@@ -225,6 +240,7 @@ class App {
     }, 1000);
 
     setTimeout(() => {
+      const gameOverScreen = new GameOverScreen(gamePlaySummary, this.closeWindow, 'modalBox')
       modalBox.style.display = 'block';
     }, this.timer.time * 1000);
   }
