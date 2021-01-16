@@ -13,6 +13,7 @@ import GameOverScreen from './components/ModalContent';
 import Logo from './components/Logo';
 import Playground from './components/Playground';
 import Question from './components/Question';
+import { getLocalStorage, setLocalStorage, scoreCheck } from './LocalStorage';
 import ComputerPlayer from './ComputerPlayer/';
 import { 
   initialGMIndex,
@@ -82,6 +83,14 @@ class App {
     this.playBtn.addEventListener('click', () => {
       this.renderGame();
     });
+
+    this.computerPlayer = new ComputerPlayer( () => {});
+
+    // do zmiany jak będziemy pobierać wartości z modala po zakończeniu rozgrywki, na pewno też nie w tym miejscu
+    const actualLocalStorage = getLocalStorage(this.mainMenuPanel.gameModeIndex)
+    if(scoreCheck(actualLocalStorage, 8, 8)) {
+      setLocalStorage(actualLocalStorage, this.mainMenuPanel.gameModeIndex, 'playerName', 6, 8)
+    }
   }
 
   closeWindow() {
