@@ -10,8 +10,9 @@ const QUIZ_MAX_TIME = process.env.QUIZ_MAX_TIME_SECONDS
 
 const time = 80;
 const numberOfQuestions = 4;
+const totalQuestions = 40;
 
 window.onload = () =>
   new App({
     options: { swApiBaseUrl: SW_API_BASE_URL, quizMaxTime: QUIZ_MAX_TIME },
-  }, time, numberOfQuestions);
+  }, time, numberOfQuestions, totalQuestions);

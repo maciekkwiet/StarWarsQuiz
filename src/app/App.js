@@ -25,11 +25,12 @@ import {
 } from './constants';
 
 class App {
-  constructor(options, time, numberOfQuestions) {
+  constructor(options, time, numberOfAnswers, totalQuestions) {
     this.time = time;
-    this.numberOfQuestions = numberOfQuestions;
+    this.numberOfAnswers = numberOfAnswers;
+    this.totalQuestions = totalQuestions; 
     this.score = 0;
-    this.questionsAmount = 0;
+    this.questionsAnswerred = 0;
     this.renderMainVievComponents()
   }
 
@@ -119,7 +120,7 @@ class App {
   async generateQuestion() {
     const question = new Question(
       this.mainMenuPanel.gameModeIndex,
-      this.numberOfQuestions,
+      this.numberOfAnswers,
     );
     const quizPicture = document.getElementsByClassName('quiz__picture')[0];
     const answerBtnsCN = document.getElementById('answers').childNodes;
@@ -192,15 +193,15 @@ class App {
       // to refactor
       answerBtns.forEach((btn) =>
         btn.addEventListener('click', () => {
-          if(gameOn) {
+          if(gameOn && this.questionsAnswerred < this.totalQuestions) {
             gameOn = false;
             if (btn.textContent === this.questionAnswers.correctAnswer) {
-              this.questionAnswers.score++;
+              this.score++;
               btn.classList.add('correct-answer');
             } else {
               btn.classList.add('wrong-answer');
             }
-            this.questionAnswers.questionsAmount++;
+            this.questionsAnswerred++;
   
             setTimeout(() => {
               for(let i = 0; i < answerBtns.length; i++) {
