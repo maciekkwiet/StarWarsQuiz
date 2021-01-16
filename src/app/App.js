@@ -40,7 +40,6 @@ class App {
     this.modal = new Modal('modalBox');
     this.button = new Button('button', playBtnText, 'play-button');
     this.rankingBox = new RankingBox('ranking-box', scores);
-    this.modal = new Modal('modalBox');
     this.gameOverScreen = new GameOverScreen(answers, this.closeWindow, 'modalBox')
     this.rules = new Rules('Mode Rules', 'rules');
     this.picture = new Picture('picture');
@@ -154,6 +153,10 @@ class App {
     const playButton = document.getElementById('button');
     const modalBox = document.getElementById('modal');
     const gameModeBtns = document.querySelectorAll('.mainMenu > div > button');
+    const timerBox = document.getElementById('timer-box');
+    const closeModalBox = modalBox.querySelector('.close');
+
+    closeModalBox.addEventListener('click', this.closeWindow);
 
     gameModeBtns.forEach((button) => {
       button.style.cursor = 'default';
@@ -222,6 +225,7 @@ class App {
 
     setTimeout(() => {
       modalBox.style.display = 'block';
+      timerBox.style.display = 'none';
     }, this.timer.time * 1000);
   }
 
