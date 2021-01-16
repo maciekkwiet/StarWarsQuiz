@@ -25,17 +25,15 @@ import {
 } from './constants';
 
 class App {
-  constructor(options) {
-    this.time = 30;
-    this.numberOfQuestions = 4;
+  constructor(options, time, numberOfQuestions) {
+    this.time = time;
+    this.numberOfQuestions = numberOfQuestions;
     this.score = 0;
     this.questionsAmount = 0;
-
     this.renderMainVievComponents()
   }
 
   renderMainVievComponents() {
-
     this.playground = new Playground('swquiz-app');
     this.logo = new Logo('logo');
     this.box = new Box('box');
@@ -188,19 +186,35 @@ class App {
 
     await this.generateQuestion().then(() => {
       const answerBtns = document.querySelectorAll('#answers > button');
+      let gameOn = true;
+      
 
       // to refactor
       answerBtns.forEach((btn) =>
         btn.addEventListener('click', () => {
-          if (btn.textContent === this.questionAnswers.correctAnswer) {
-            this.score++;
-            btn.classList.add('correct-answer');
-          } else {
-            btn.classList.add('wrong-answer');
+          if(gameOn) {
+            gameOn = false;
+            if (btn.textContent === this.questionAnswers.correctAnswer) {
+              this.questionAnswers.score++;
+              btn.classList.add('correct-answer');
+            } else {
+              btn.classList.add('wrong-answer');
+            }
+            this.questionAnswers.questionsAmount++;
+  
+            setTimeout(() => {
+              for(let i = 0; i < answerBtns.length; i++) {
+                if(answerBtns[i].textContent === this.questionAnswers.correctAnswer) {
+                  answerBtns[i].classList.add('correct-answer');
+                }
+              }
+            }, 300);
+   
+            setTimeout(() => {
+              this.generateQuestion();
+              gameOn = true;
+            }, 1000);
           }
-
-          this.questionsAmount++;
-          this.generateQuestion();
         }),
       );
     });
