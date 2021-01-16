@@ -4,6 +4,7 @@ import Button from './Button';
 class WhiteButton extends Button {
   constructor(id, content, styleName) {
     super(id, content, styleName);
+    this.addIcon('../../../static/assets/ui/hof.svg')
   }
 
   addIcon(iconPath) {

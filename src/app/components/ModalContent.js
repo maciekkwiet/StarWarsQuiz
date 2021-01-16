@@ -65,6 +65,7 @@ export default class GameOverScreen {
     const picture= document.createElement('img');
     picture.src = "../../static/assets/img/modes/MasterYoda.png";
     summary.appendChild(picture);
+    picture.classList.add("yodaPicture");
     
     const table= document.createElement('div');
     summary.appendChild(table);
