@@ -14,7 +14,7 @@ import Logo from './components/Logo';
 import Question from './components/Question';
 import { getLocalStorage, setLocalStorage, scoreCheck } from './LocalStorage';
 import ComputerPlayer from './ComputerPlayer/';
-import {
+import { 
   initialGMIndex,
   whiteBtnText,
   playBtnText,
@@ -27,7 +27,7 @@ class App {
   constructor(options, time, numberOfAnswers, totalQuestions) {
     this.time = time;
     this.numberOfAnswers = numberOfAnswers;
-    this.totalQuestions = totalQuestions;
+    this.totalQuestions = totalQuestions; 
     this.score = 0;
     this.questionsAnswerred = 0;
     this.renderMainVievComponents()
@@ -39,6 +39,7 @@ class App {
     this.modal = new Modal('modalBox');
     this.button = new Button('button', playBtnText, 'play-button');
     this.rankingBox = new RankingBox('ranking-box', scores);
+    this.gameOverScreen = new GameOverScreen(answers, this.closeWindow, 'modalBox')
     this.rules = new Rules('Mode Rules', 'rules');
     this.picture = new Picture('picture');
     this.mainMenuPanel = new MainMenu(
@@ -46,7 +47,6 @@ class App {
       mainMenuNames,
       initialGMIndex,
     );
-    this.gameOverScreen = new GameOverScreen(answers, this.closeWindow, 'modalBox', this.mainMenuPanel.gameModeIndex);
     this.whiteButton = new WhiteButton(
       'whiteButton',
       whiteBtnText[0],
@@ -57,7 +57,7 @@ class App {
   }
 
   setMainVievLogic() {
-    this.computerPlayer = new ComputerPlayer(() => { });
+    this.computerPlayer = new ComputerPlayer( () => {});
 
     this.whiteBtn = document.querySelector('.whiteButton');
     this.btns = document.querySelectorAll('.mainMenu > div > button');
@@ -82,11 +82,11 @@ class App {
       this.renderGame();
     });
 
-    this.computerPlayer = new ComputerPlayer(() => { });
+    this.computerPlayer = new ComputerPlayer( () => {});
 
     // do zmiany jak będziemy pobierać wartości z modala po zakończeniu rozgrywki, na pewno też nie w tym miejscu
     const actualLocalStorage = getLocalStorage(this.mainMenuPanel.gameModeIndex)
-    if (scoreCheck(actualLocalStorage, 8, 8)) {
+    if(scoreCheck(actualLocalStorage, 8, 8)) {
       setLocalStorage(actualLocalStorage, this.mainMenuPanel.gameModeIndex, 'playerName', 6, 8)
     }
   }
@@ -187,7 +187,7 @@ class App {
       answerBtns.forEach((btn) =>
         btn.addEventListener('click', () => {
 
-          if (gameOn && this.questionsAnswerred < this.totalQuestions) {
+          if(gameOn && this.questionsAnswerred < this.totalQuestions) {
             gameOn = false;
             if (btn.textContent === this.questionAnswers.correctAnswer) {
               this.score++;
@@ -204,7 +204,7 @@ class App {
                 }
               }
             }, 300);
-
+            
             setTimeout(() => {
               answerBtns.forEach((btn) => {
                 btn.classList.remove('correct-answer');
