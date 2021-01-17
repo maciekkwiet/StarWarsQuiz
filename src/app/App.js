@@ -39,7 +39,7 @@ class App {
     this.modal = new Modal('modalBox');
     this.button = new Button('button', playBtnText, 'play-button');
     this.rankingBox = new RankingBox('ranking-box', scores);
-    this.gameOverScreen = new GameOverScreen(answers, this.closeWindow, 'modalBox')
+    
     this.rules = new Rules('Mode Rules', 'rules');
     this.picture = new Picture('picture');
     this.mainMenuPanel = new MainMenu(
