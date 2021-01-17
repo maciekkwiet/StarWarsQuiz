@@ -36,24 +36,6 @@ export const scores = [
 
 export const mainMenuNames = ['People', 'Vehicles', 'Starships']
 
-export const answers = [{
-  questionPicture: "../../static/assets/img/modes/people/1.jpg",
-  playerAnswer: "DarthVader",
-  computerAnswer: "Darth Father",
-  correctAnswer: "Luke Skywalker",
-  playerAnswerIsCorrect: false,
-  computerAnswerIsCorrect: false,
-},
-{
-  questionPicture: '../../static/assets/img/modes/people/36.jpg',
-  playerAnswer: "Jar Jar Binks",
-  computerAnswer: "Jar Jar Binks",
-  correctAnswer: "Jar Jar Binks",
-  playerAnswerIsCorrect: true,
-  computerAnswerIsCorrect: true,
-},
-];
-
 export const TypesOfQuestion = {
   People: {
     maxId: 88,

@@ -20,7 +20,6 @@ import {
   playBtnText,
   scores,
   mainMenuNames,
-  answers,
 } from './constants';
 
 class App {
