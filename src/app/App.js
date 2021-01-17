@@ -12,7 +12,7 @@ import QuestionAnswers from './components/QuestionAnswers';
 import GameOverScreen from './components/ModalContent';
 import Logo from './components/Logo';
 import Question from './components/Question';
-import { getLocalStorage, setLocalStorage, scoreCheck } from './LocalStorage';
+import { getScoreLocalStorage, setScoreLocalStorage, scoreCheck } from './LocalStorage';
 import ComputerPlayer from './ComputerPlayer/';
 import {
   initialGMIndex,
@@ -79,16 +79,16 @@ class App {
     this.playBtn.addEventListener('click', () => {
       this.renderGame();
     });
-
-    // do zmiany jak będziemy pobierać wartości z modala po zakończeniu rozgrywki, na pewno też nie w tym miejscu
-    const actualLocalStorage = getLocalStorage(this.mainMenuPanel.gameModeIndex)
-    if (scoreCheck(actualLocalStorage, 8, 8)) {
-      setLocalStorage(actualLocalStorage, this.mainMenuPanel.gameModeIndex, 'playerName', 6, 8)
-    }
   }
 
   closeWindow() {
-    this.modal.closeModal();
+    const actualLocalStorage = getScoreLocalStorage(this.mainMenuPanel.gameModeIndex)
+    if (scoreCheck(actualLocalStorage, 8, 8)) {
+      const playerName = getNameLocalStorage()
+      setScoreLocalStorage(actualLocalStorage, this.mainMenuPanel.gameModeIndex, playerName, 6, 8)
+    }
+    debugger
+    // this.modal.closeModal();
   };
 
   rulesContent() {
@@ -176,12 +176,12 @@ class App {
 
     this.box.handleBoxContent(this.mainMenuPanel.gameModeIndex, true);
 
-    const gamePlaySummary = [];
+    this.gamePlaySummary = [];
 
     await this.generateQuestion().then(() => {
       const answerBtns = document.querySelectorAll('#answers > button')
       let gameOn = true;
-      gamePlaySummary.length = 0;
+      this.gamePlaySummary.length = 0;
 
       // to refactor
       answerBtns.forEach((btn) =>
@@ -205,7 +205,7 @@ class App {
               roundSummary.playerAnswerIsCorrect = false;
             }
             this.questionsAnswerred++;
-             gamePlaySummary.push(roundSummary);
+             this.gamePlaySummary.push(roundSummary);
             setTimeout(() => {
               for (let i = 0; i < answerBtns.length; i++) {
                 if (answerBtns[i].textContent === this.questionAnswers.correctAnswer) {
@@ -233,7 +233,7 @@ class App {
     }, 1000);
 
     setTimeout(() => {
-      const gameOverScreen = new GameOverScreen(gamePlaySummary, this.closeWindow, 'modalBox')
+      new GameOverScreen(this.gamePlaySummary, 'modalBox', this.mainMenuPanel.gameModeIndex)
       modalBox.style.display = 'block';
       timerBox.style.display = 'none';
     }, this.timer.time * 1000);

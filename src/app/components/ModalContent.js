@@ -1,20 +1,20 @@
-import { getLocalStorage, setLocalStorage, scoreCheck } from '../LocalStorage'
+import {setNameLocalStorage, getScoreLocalStorage, setScoreLocalStorage, scoreCheck} from '../LocalStorage'
 
 export default class GameOverScreen {
-  constructor(answers, closeWindow, id, gameMode) {
-    this.render(answers, closeWindow, id, gameMode);
+  constructor(answers, id, gameMode) {
+    this.render(answers, id, gameMode);
   }
 
-  contentRender(answers, closeWindow, id, gameMode) {
+  contentRender(answers, id, gameMode) {
     const modalBox = document.querySelector(`#${id}`);
     this.renderHeaders(modalBox, answers);
     this.renderTable(modalBox, answers);
     this.renderFormArea(modalBox);
-    this.renderButton(modalBox, closeWindow, answers, gameMode);
+    this.renderButton(modalBox, answers, gameMode);
   }
 
-  render(answers, closeWindow, id, gameMode) {
-    this.contentRender(answers, closeWindow, id, gameMode);
+  render(answers, id, gameMode) {
+    this.contentRender(answers, id, gameMode);
   }
 
   checkWhoWon(player1Answers, player2Answers, allAnswers) {
@@ -149,7 +149,7 @@ export default class GameOverScreen {
     description.classList.add("form-description");
   }
 
-  renderButton(modalBox, closeWindow, answers, gameMode) {
+  renderButton(modalBox, answers, gameMode) {
     const playerScore = `${this.playerCorrectAnswers}/${(answers.length)}`;
     const button = document.createElement('button');
     modalBox.appendChild(button);
@@ -160,14 +160,20 @@ export default class GameOverScreen {
       if (form.checkValidity() === true) {
         const formData = new FormData(form);
         const playerName = formData.get('playerName');
-        const actualLocalStorage = getLocalStorage(gameMode);
-        if (scoreCheck(actualLocalStorage, 8, 8)) {
-          setLocalStorage(actualLocalStorage, gameMode, playerName, 6, 8)
+        setNameLocalStorage(playerName)
+        const actualLocalStorage = getScoreLocalStorage(gameMode)
+        if (scoreCheck(actualLocalStorage, this.playerCorrectAnswers, answers.length)) {
+          setScoreLocalStorage(actualLocalStorage, gameMode, playerName, this.playerCorrectAnswers, answers.length)
         }
-        closeWindow(this.input.value, playerScore); // Fix needed
+        this.closeWindow();
       } else {
         document.querySelector("form").reportValidity()
       }
     });
+  }
+
+  closeWindow() {
+    const modalBox = document.getElementById('modal');
+    modalBox.style.display = 'none';
   }
 }
