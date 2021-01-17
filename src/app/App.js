@@ -20,7 +20,6 @@ import {
   playBtnText,
   scores,
   mainMenuNames,
-  answers,
 } from './constants';
 
 class App {
@@ -46,7 +45,7 @@ class App {
       mainMenuNames,
       initialGMIndex,
     );
-    this.gameOverScreen = new GameOverScreen(answers, this.closeWindow, 'modalBox', this.mainMenuPanel.gameModeIndex);
+    
     this.whiteButton = new WhiteButton(
       'whiteButton',
       whiteBtnText[0],
@@ -57,8 +56,7 @@ class App {
   }
 
   setMainVievLogic() {
-    this.computerPlayer = new ComputerPlayer(() => { });
-
+    this.computerPlayer = new ComputerPlayer();
     this.whiteBtn = document.querySelector('.whiteButton');
     this.btns = document.querySelectorAll('.mainMenu > div > button');
     this.playBtn = document.querySelector('.play-button');
@@ -81,8 +79,6 @@ class App {
     this.playBtn.addEventListener('click', () => {
       this.renderGame();
     });
-
-    this.computerPlayer = new ComputerPlayer(() => { });
 
     // do zmiany jak będziemy pobierać wartości z modala po zakończeniu rozgrywki, na pewno też nie w tym miejscu
     const actualLocalStorage = getLocalStorage(this.mainMenuPanel.gameModeIndex)
@@ -131,6 +127,7 @@ class App {
         );
       }
       this.questionAnswers.answers = question._answers;
+      this.questionAnswers.picture = atob(question.questionData.image);
       this.questionAnswers.correctAnswer = this.questionAnswers.answers[
         question._rightAnswer - 1
       ];
@@ -179,24 +176,36 @@ class App {
 
     this.box.handleBoxContent(this.mainMenuPanel.gameModeIndex, true);
 
+    const gamePlaySummary = [];
+
     await this.generateQuestion().then(() => {
-      const answerBtns = document.querySelectorAll('#answers > button');
+      const answerBtns = document.querySelectorAll('#answers > button')
       let gameOn = true;
+      gamePlaySummary.length = 0;
 
       // to refactor
       answerBtns.forEach((btn) =>
         btn.addEventListener('click', () => {
 
-          if (gameOn && this.questionsAnswerred < this.totalQuestions) {
+          if(gameOn && this.questionsAnswerred < this.totalQuestions) {
+            const roundSummary = {
+              playerAnswer: btn.textContent,
+              correctAnswer: this.questionAnswers.correctAnswer,
+              questionPicture: this.questionAnswers.picture,
+              computerAnswer: this.computerPlayer.askQuestion(this.questionAnswers.answers),
+            }
+            roundSummary.computerAnswerIsCorrect = roundSummary.correctAnswer === roundSummary.computerAnswer;
             gameOn = false;
             if (btn.textContent === this.questionAnswers.correctAnswer) {
               this.score++;
               btn.classList.add('correct-answer');
+              roundSummary.playerAnswerIsCorrect = true;
             } else {
               btn.classList.add('wrong-answer');
+              roundSummary.playerAnswerIsCorrect = false;
             }
             this.questionsAnswerred++;
-
+             gamePlaySummary.push(roundSummary);
             setTimeout(() => {
               for (let i = 0; i < answerBtns.length; i++) {
                 if (answerBtns[i].textContent === this.questionAnswers.correctAnswer) {
@@ -224,6 +233,7 @@ class App {
     }, 1000);
 
     setTimeout(() => {
+      const gameOverScreen = new GameOverScreen(gamePlaySummary, this.closeWindow, 'modalBox')
       modalBox.style.display = 'block';
       timerBox.style.display = 'none';
     }, this.timer.time * 1000);
