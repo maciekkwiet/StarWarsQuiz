@@ -58,7 +58,7 @@ class App {
   }
 
   setMainVievLogic() {
-    this.computerPlayer = new ComputerPlayer( () => {});
+    this.computerPlayer = new ComputerPlayer();
 
     this.whiteBtn = document.querySelector('.whiteButton');
     this.btns = document.querySelectorAll('.mainMenu > div > button');
@@ -82,8 +82,6 @@ class App {
     this.playBtn.addEventListener('click', () => {
       this.renderGame();
     });
-
-    this.computerPlayer = new ComputerPlayer( () => {});
 
     // do zmiany jak będziemy pobierać wartości z modala po zakończeniu rozgrywki, na pewno też nie w tym miejscu
     const actualLocalStorage = getLocalStorage(this.mainMenuPanel.gameModeIndex)
@@ -200,10 +198,9 @@ class App {
               playerAnswer: btn.textContent,
               correctAnswer: this.questionAnswers.correctAnswer,
               questionPicture: this.questionAnswers.picture,
-              computerAnswer: this.questionAnswers.correctAnswer,
-              computerAnswerIsCorrect: true,
+              computerAnswer: this.computerPlayer.askQuestion(this.questionAnswers.answers),
             }
-
+            roundSummary.computerAnswerIsCorrect = roundSummary.correctAnswer === roundSummary.computerAnswer;
             gameOn = false;
             if (btn.textContent === this.questionAnswers.correctAnswer) {
               this.questionAnswers.score++;
@@ -214,6 +211,7 @@ class App {
               roundSummary.playerAnswerIsCorrect = false;
             }
             this.questionAnswers.questionsAmount++;
+            
 
             gamePlaySummary.push(roundSummary);
   
