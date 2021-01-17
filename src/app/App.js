@@ -11,7 +11,6 @@ import Rules from './components/Rules';
 import QuestionAnswers from './components/QuestionAnswers';
 import GameOverScreen from './components/ModalContent';
 import Logo from './components/Logo';
-import Playground from './components/Playground';
 import Question from './components/Question';
 import { getLocalStorage, setLocalStorage, scoreCheck } from './LocalStorage';
 import ComputerPlayer from './ComputerPlayer/';
@@ -35,7 +34,6 @@ class App {
   }
 
   renderMainVievComponents() {
-    this.playground = new Playground('swquiz-app');
     this.logo = new Logo('logo');
     this.box = new Box('box');
     this.modal = new Modal('modalBox');
