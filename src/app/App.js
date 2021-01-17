@@ -45,7 +45,7 @@ class App {
       mainMenuNames,
       initialGMIndex,
     );
-    this.gameOverScreen = new GameOverScreen(answers, this.closeWindow, 'modalBox', this.mainMenuPanel.gameModeIndex);
+    
     this.whiteButton = new WhiteButton(
       'whiteButton',
       whiteBtnText[0],
