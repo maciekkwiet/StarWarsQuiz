@@ -41,7 +41,6 @@ class App {
     this.modal = new Modal('modalBox');
     this.button = new Button('button', playBtnText, 'play-button');
     this.rankingBox = new RankingBox('ranking-box', scores);
-    this.modal = new Modal('modalBox');
     this.gameOverScreen = new GameOverScreen(answers, this.closeWindow, 'modalBox')
     this.rules = new Rules('Mode Rules', 'rules');
     this.picture = new Picture('picture');
@@ -56,7 +55,7 @@ class App {
       'whiteButton',
     );
 
-    this.setMainVievLogic()
+    this.setMainVievLogic();
   }
 
   setMainVievLogic() {
@@ -124,7 +123,6 @@ class App {
     );
     const quizPicture = document.getElementsByClassName('quiz__picture')[0];
     const answerBtnsCN = document.getElementById('answers').childNodes;
-    const answerBtns = document.querySelectorAll('#answers > button');
 
     await question.getQuestionData().then(() => {
       if (!this.questionAnswers) {
@@ -138,12 +136,6 @@ class App {
       this.questionAnswers.correctAnswer = this.questionAnswers.answers[
         question._rightAnswer - 1
       ];
-
-      //to refactor
-      answerBtns.forEach((btn) => {
-        btn.classList.remove('correct-answer');
-        btn.classList.remove('wrong-answer');
-      });
       for (let i = 0; i < question._answers.length; i++) {
         answerBtnsCN[i].textContent = question._answers[i];
       }
@@ -162,15 +154,19 @@ class App {
     const playButton = document.getElementById('button');
     const modalBox = document.getElementById('modal');
     const gameModeBtns = document.querySelectorAll('.mainMenu > div > button');
+    const timerBox = document.getElementById('timer-box');
+    const closeModalBox = modalBox.querySelector('.close');
 
-    gameModeBtns.forEach(button => {
-      button.style.cursor = 'default'
+    closeModalBox.addEventListener('click', this.closeWindow);
+
+    gameModeBtns.forEach((button) => {
+      button.style.cursor = 'default';
       let newEl = button.cloneNode(true);
       button.parentNode.replaceChild(newEl, button);
-    })
+    });
 
     const saber = document.getElementById('saber');
-    if(window.innerHeight > window.innerWidth) (saber.style.gridArea = 'play')
+    if (window.innerHeight > window.innerWidth) saber.style.gridArea = 'play';
 
     window.addEventListener('resize', () => {
       window.innerHeight > window.innerWidth
@@ -188,11 +184,11 @@ class App {
     await this.generateQuestion().then(() => {
       const answerBtns = document.querySelectorAll('#answers > button');
       let gameOn = true;
-      
 
       // to refactor
       answerBtns.forEach((btn) =>
         btn.addEventListener('click', () => {
+
           if(gameOn && this.questionsAnswerred < this.totalQuestions) {
             gameOn = false;
             if (btn.textContent === this.questionAnswers.correctAnswer) {
@@ -202,16 +198,20 @@ class App {
               btn.classList.add('wrong-answer');
             }
             this.questionsAnswerred++;
-  
+
             setTimeout(() => {
-              for(let i = 0; i < answerBtns.length; i++) {
-                if(answerBtns[i].textContent === this.questionAnswers.correctAnswer) {
+              for (let i = 0; i < answerBtns.length; i++) {
+                if (answerBtns[i].textContent === this.questionAnswers.correctAnswer) {
                   answerBtns[i].classList.add('correct-answer');
                 }
               }
             }, 300);
-   
+            
             setTimeout(() => {
+              answerBtns.forEach((btn) => {
+                btn.classList.remove('correct-answer');
+                btn.classList.remove('wrong-answer');
+              });
               this.generateQuestion();
               gameOn = true;
             }, 1000);
@@ -227,6 +227,7 @@ class App {
 
     setTimeout(() => {
       modalBox.style.display = 'block';
+      timerBox.style.display = 'none';
     }, this.timer.time * 1000);
   }
 
