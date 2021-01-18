@@ -5,15 +5,15 @@ export const rulesContent = [
 ];
 
 export const boxContent = [
-  'MODE : Who is this character?',
-  'MODE : What is this vehicle?',
-  'MODE : What is this starship?',
+  'Who is this character?',
+  'What is this vehicle?',
+  'What is this starship?',
 ];
 
 export const questionContent = [
-  'Question : Who is this character?',
-  'Question : What is this vehicle?',
-  'Question : What is this starship?',
+  'Who is this character?',
+  'What is this vehicle?',
+  'What is this starship?',
 ];
 
 export const exemplaryPicture = [
