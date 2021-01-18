@@ -8,7 +8,7 @@ const QUIZ_MAX_TIME = process.env.QUIZ_MAX_TIME_SECONDS
   ? process.env.QUIZ_MAX_TIME_SECONDS * ONE_SECOND_MILLIS
   : 120 * ONE_SECOND_MILLIS;
 
-const time = 1;
+const time = 60;
 const numberOfQuestions = 4;
 const totalQuestions = 40;
 
