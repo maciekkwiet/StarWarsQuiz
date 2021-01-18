@@ -12,7 +12,6 @@ import QuestionAnswers from './components/QuestionAnswers';
 import GameOverScreen from './components/ModalContent';
 import Logo from './components/Logo';
 import Question from './components/Question';
-import { getScoreLocalStorage, setScoreLocalStorage, scoreCheck } from './LocalStorage';
 import ComputerPlayer from './ComputerPlayer/';
 import {
   initialGMIndex,
@@ -82,12 +81,6 @@ class App {
   }
 
   closeWindow() {
-    const actualLocalStorage = getScoreLocalStorage(this.mainMenuPanel.gameModeIndex)
-    if (scoreCheck(actualLocalStorage, 8, 8)) {
-      const playerName = getNameLocalStorage()
-      setScoreLocalStorage(actualLocalStorage, this.mainMenuPanel.gameModeIndex, playerName, 6, 8)
-    }
-    debugger
     // this.modal.closeModal();
   };
 

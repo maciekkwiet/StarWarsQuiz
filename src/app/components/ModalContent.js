@@ -9,7 +9,7 @@ export default class GameOverScreen {
     const modalBox = document.querySelector(`#${id}`);
     this.renderHeaders(modalBox, answers);
     this.renderTable(modalBox, answers);
-    this.renderFormArea(modalBox);
+    this.renderFormArea(modalBox, answers, gameMode);
     this.renderButton(modalBox, answers, gameMode);
   }
 
@@ -125,7 +125,7 @@ export default class GameOverScreen {
       correctAnswer.innerHTML = answers[i].correctAnswer
     }
   }
-  renderFormArea(modalBox) {
+  renderFormArea(modalBox, answers, gameMode) {
     const formContainer = document.createElement('div');
     modalBox.appendChild(formContainer);
     formContainer.classList.add("form-name");
@@ -147,29 +147,32 @@ export default class GameOverScreen {
     formContainer.appendChild(description);
     description.innerHTML = 'Please fill your name in order to receive eternal glory in whole Galaxy!';
     description.classList.add("form-description");
+
+    this.input.addEventListener('change', () => this.saveData(answers, gameMode));
   }
 
   renderButton(modalBox, answers, gameMode) {
-    const playerScore = `${this.playerCorrectAnswers}/${(answers.length)}`;
     const button = document.createElement('button');
     modalBox.appendChild(button);
     button.innerHTML = "may the force be with you";
     button.classList.add("modal-button");
-    button.addEventListener("click", () => {
-      const form = document.querySelector('form');
-      if (form.checkValidity() === true) {
-        const formData = new FormData(form);
-        const playerName = formData.get('playerName');
-        setNameLocalStorage(playerName)
-        const actualLocalStorage = getScoreLocalStorage(gameMode)
-        if (scoreCheck(actualLocalStorage, this.playerCorrectAnswers, answers.length)) {
-          setScoreLocalStorage(actualLocalStorage, gameMode, playerName, this.playerCorrectAnswers, answers.length)
-        }
-        this.closeWindow();
-      } else {
-        document.querySelector("form").reportValidity()
+    button.addEventListener("click", () => this.saveData(answers, gameMode));
+  }
+
+  saveData(answers, gameMode) {
+    const form = document.querySelector('form');
+    if (form.checkValidity() === true) {
+      const formData = new FormData(form);
+      const playerName = formData.get('playerName');
+      setNameLocalStorage(playerName)
+      const actualLocalStorage = getScoreLocalStorage(gameMode)
+      if (scoreCheck(actualLocalStorage, this.playerCorrectAnswers, answers.length)) {
+        setScoreLocalStorage(actualLocalStorage, gameMode, playerName, this.playerCorrectAnswers, answers.length)
       }
-    });
+      this.closeWindow();
+    } else {
+      document.querySelector("form").reportValidity()
+    }
   }
 
   closeWindow() {
