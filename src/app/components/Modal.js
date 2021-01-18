@@ -20,7 +20,6 @@ class Modal {
 
   closeModal() {
     modal.style.display = "none";
-    location.reload();
   }
 
   closeModalOutside(e) {

@@ -12,6 +12,7 @@ class Box {
     container.appendChild(content);
     content.textContent = boxContent[initialGMIndex];
   }
+  
   handleBoxContent(index, isQuestion) {
     const content = document.querySelector('#box span');
     isQuestion

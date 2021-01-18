@@ -1,20 +1,20 @@
-import { getLocalStorage, setLocalStorage, scoreCheck } from '../LocalStorage'
+import {setNameLocalStorage, getScoreLocalStorage, setScoreLocalStorage, scoreCheck} from '../LocalStorage'
 
 export default class GameOverScreen {
-  constructor(answers, closeWindow, id, gameMode) {
-    this.render(answers, closeWindow, id, gameMode);
+  constructor(answers, id, gameMode, closeWindow) {
+    this.render(answers, id, gameMode, closeWindow);
   }
 
-  contentRender(answers, closeWindow, id, gameMode) {
+  contentRender(answers, id, gameMode, closeWindow) {
     const modalBox = document.querySelector(`#${id}`);
     this.renderHeaders(modalBox, answers);
     this.renderTable(modalBox, answers);
-    this.renderFormArea(modalBox);
-    this.renderButton(modalBox, closeWindow, answers, gameMode);
+    this.renderFormArea(modalBox, answers, gameMode, closeWindow);
+    this.renderButton(modalBox, answers, gameMode, closeWindow);
   }
 
-  render(answers, closeWindow, id, gameMode) {
-    this.contentRender(answers, closeWindow, id, gameMode);
+  render(answers, id, gameMode, closeWindow) {
+    this.contentRender(answers, id, gameMode, closeWindow);
   }
 
   checkWhoWon(player1Answers, player2Answers, allAnswers) {
@@ -125,7 +125,7 @@ export default class GameOverScreen {
       correctAnswer.innerHTML = answers[i].correctAnswer
     }
   }
-  renderFormArea(modalBox) {
+  renderFormArea(modalBox, answers, gameMode, closeWindow) {
     const formContainer = document.createElement('div');
     modalBox.appendChild(formContainer);
     formContainer.classList.add("form-name");
@@ -147,27 +147,36 @@ export default class GameOverScreen {
     formContainer.appendChild(description);
     description.innerHTML = 'Please fill your name in order to receive eternal glory in whole Galaxy!';
     description.classList.add("form-description");
+
+    this.input.addEventListener('change', () => this.saveData(answers, gameMode, closeWindow));
   }
 
-  renderButton(modalBox, closeWindow, answers, gameMode) {
-    const playerScore = `${this.playerCorrectAnswers}/${(answers.length)}`;
+  renderButton(modalBox, answers, gameMode, closeWindow) {
     const button = document.createElement('button');
     modalBox.appendChild(button);
     button.innerHTML = "may the force be with you";
     button.classList.add("modal-button");
-    button.addEventListener("click", () => {
-      const form = document.querySelector('form');
-      if (form.checkValidity() === true) {
-        const formData = new FormData(form);
-        const playerName = formData.get('playerName');
-        const actualLocalStorage = getLocalStorage(gameMode);
-        if (scoreCheck(actualLocalStorage, 8, 8)) {
-          setLocalStorage(actualLocalStorage, gameMode, playerName, 6, 8)
-        }
-        closeWindow(this.input.value, playerScore); // Fix needed
-      } else {
-        document.querySelector("form").reportValidity()
+    button.addEventListener("click", () => this.saveData(answers, gameMode, closeWindow));
+  }
+
+  saveData(answers, gameMode, closeWindow) {
+    const form = document.querySelector('form');
+    if (form.checkValidity() === true) {
+      const formData = new FormData(form);
+      const playerName = formData.get('playerName');
+      setNameLocalStorage(playerName)
+      const actualLocalStorage = getScoreLocalStorage(gameMode)
+      if (scoreCheck(actualLocalStorage, this.playerCorrectAnswers, answers.length)) {
+        setScoreLocalStorage(actualLocalStorage, gameMode, playerName, this.playerCorrectAnswers, answers.length)
       }
-    });
+      closeWindow()
+    } else {
+      document.querySelector("form").reportValidity()
+    }
+  }
+
+  closeWindow() {
+    const modalBox = document.getElementById('modal');
+    modalBox.style.display = 'none';
   }
 }

@@ -1,10 +1,18 @@
 const compareNumbers = (a,b) => b.score-a.score
 
-export function getLocalStorage(gameModeIndex) {
+export function getScoreLocalStorage(gameModeIndex) {
   return JSON.parse(localStorage.getItem(`${gameModeIndex}`)) || [];
 }
 
-export function setLocalStorage(actualLocalStorage, gameModeIndex, playerName, playerCorrectAnswers, playerAllAnswers) {
+export function getNameLocalStorage() {
+  return localStorage.getItem('name') || '';
+}
+
+export function setNameLocalStorage(nameValue) {
+  return localStorage.setItem('name', nameValue);
+}
+
+export function setScoreLocalStorage(actualLocalStorage, gameModeIndex, playerName, playerCorrectAnswers, playerAllAnswers) {
   const newLocalStorage = actualLocalStorage ? actualLocalStorage.slice(0,2) : [];
   const newPlayer = {name: playerName, correctAnswers: playerCorrectAnswers, allAnswers: playerAllAnswers, score: playerCorrectAnswers / playerAllAnswers}
   newLocalStorage.push(newPlayer);
