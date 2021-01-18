@@ -26,8 +26,6 @@ class App {
     this.time = time;
     this.numberOfAnswers = numberOfAnswers;
     this.totalQuestions = totalQuestions;
-    this.score = 0;
-    this.questionsAnswerred = 0;
     this.renderMainVievComponents()
   }
 
@@ -51,11 +49,12 @@ class App {
       'whiteButton',
     );
 
+    this.computerPlayer = new ComputerPlayer();
+
     this.setMainVievLogic();
   }
 
   setMainVievLogic() {
-    this.computerPlayer = new ComputerPlayer();
     this.whiteBtn = document.querySelector('.whiteButton');
     this.btns = document.querySelectorAll('.mainMenu > div > button');
     this.playBtn = document.querySelector('.play-button');
@@ -87,10 +86,7 @@ class App {
   }
 
   closeWindow() {
-    // aktualnie wszystkie możliwości zamknięcia modala przechodzą przez tą funkcję :D
-    const modalBox = document.getElementById('modal');
-    modalBox.style.display = 'none';
-
+    location.reload(true);
   };
 
   rulesContent() {
@@ -142,6 +138,9 @@ class App {
   }
 
   async renderGame() {
+    this.score = 0;
+    this.questionsAnswerred = 0;
+
     this.timer = new Timer(this.time, 'timer-box');
     this.lightsaber = new Lightsaber(this.time, 'saber');
 
@@ -230,15 +229,16 @@ class App {
       );
     });
 
-    setInterval(() => {
+    const interval = setInterval(() => {
       this.timer.decrement();
       this.lightsaber.progress(this.time);
     }, 1000);
 
     setTimeout(() => {
-      new GameOverScreen(this.gamePlaySummary, 'modalBox', this.mainMenuPanel.gameModeIndex, this.closeWindow)
+      this.gameOverScreen = new GameOverScreen(this.gamePlaySummary, 'modalBox', this.mainMenuPanel.gameModeIndex, this.closeWindow)
       modalBox.style.display = 'block';
       timerBox.style.display = 'none';
+      clearInterval(interval)
     }, this.timer.time * 1000);
   }
 
