@@ -1,20 +1,20 @@
 import {setNameLocalStorage, getScoreLocalStorage, setScoreLocalStorage, scoreCheck} from '../LocalStorage'
 
 export default class GameOverScreen {
-  constructor(answers, id, gameMode) {
-    this.render(answers, id, gameMode);
+  constructor(answers, id, gameMode, closeWindow) {
+    this.render(answers, id, gameMode, closeWindow);
   }
 
-  contentRender(answers, id, gameMode) {
+  contentRender(answers, id, gameMode, closeWindow) {
     const modalBox = document.querySelector(`#${id}`);
     this.renderHeaders(modalBox, answers);
     this.renderTable(modalBox, answers);
-    this.renderFormArea(modalBox, answers, gameMode);
-    this.renderButton(modalBox, answers, gameMode);
+    this.renderFormArea(modalBox, answers, gameMode, closeWindow);
+    this.renderButton(modalBox, answers, gameMode, closeWindow);
   }
 
-  render(answers, id, gameMode) {
-    this.contentRender(answers, id, gameMode);
+  render(answers, id, gameMode, closeWindow) {
+    this.contentRender(answers, id, gameMode, closeWindow);
   }
 
   checkWhoWon(player1Answers, player2Answers, allAnswers) {
@@ -125,7 +125,7 @@ export default class GameOverScreen {
       correctAnswer.innerHTML = answers[i].correctAnswer
     }
   }
-  renderFormArea(modalBox, answers, gameMode) {
+  renderFormArea(modalBox, answers, gameMode, closeWindow) {
     const formContainer = document.createElement('div');
     modalBox.appendChild(formContainer);
     formContainer.classList.add("form-name");
@@ -148,18 +148,18 @@ export default class GameOverScreen {
     description.innerHTML = 'Please fill your name in order to receive eternal glory in whole Galaxy!';
     description.classList.add("form-description");
 
-    this.input.addEventListener('change', () => this.saveData(answers, gameMode));
+    this.input.addEventListener('change', () => this.saveData(answers, gameMode, closeWindow));
   }
 
-  renderButton(modalBox, answers, gameMode) {
+  renderButton(modalBox, answers, gameMode, closeWindow) {
     const button = document.createElement('button');
     modalBox.appendChild(button);
     button.innerHTML = "may the force be with you";
     button.classList.add("modal-button");
-    button.addEventListener("click", () => this.saveData(answers, gameMode));
+    button.addEventListener("click", () => this.saveData(answers, gameMode, closeWindow));
   }
 
-  saveData(answers, gameMode) {
+  saveData(answers, gameMode, closeWindow) {
     const form = document.querySelector('form');
     if (form.checkValidity() === true) {
       const formData = new FormData(form);
@@ -169,7 +169,7 @@ export default class GameOverScreen {
       if (scoreCheck(actualLocalStorage, this.playerCorrectAnswers, answers.length)) {
         setScoreLocalStorage(actualLocalStorage, gameMode, playerName, this.playerCorrectAnswers, answers.length)
       }
-      this.closeWindow();
+      closeWindow()
     } else {
       document.querySelector("form").reportValidity()
     }

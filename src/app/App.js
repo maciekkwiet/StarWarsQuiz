@@ -78,10 +78,19 @@ class App {
     this.playBtn.addEventListener('click', () => {
       this.renderGame();
     });
+
+    window.addEventListener('click', (e) => this.closeModalOutside(e))
+  }
+
+  closeModalOutside(e) {
+    e.target === modal ? this.closeWindow() : null;
   }
 
   closeWindow() {
-    // this.modal.closeModal();
+    // aktualnie wszystkie możliwości zamknięcia modala przechodzą przez tą funkcję :D
+    const modalBox = document.getElementById('modal');
+    modalBox.style.display = 'none';
+
   };
 
   rulesContent() {
@@ -226,7 +235,7 @@ class App {
     }, 1000);
 
     setTimeout(() => {
-      new GameOverScreen(this.gamePlaySummary, 'modalBox', this.mainMenuPanel.gameModeIndex)
+      new GameOverScreen(this.gamePlaySummary, 'modalBox', this.mainMenuPanel.gameModeIndex, this.closeWindow)
       modalBox.style.display = 'block';
       timerBox.style.display = 'none';
     }, this.timer.time * 1000);
