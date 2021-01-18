@@ -221,8 +221,9 @@ class App {
                 btn.classList.remove('correct-answer');
                 btn.classList.remove('wrong-answer');
               });
-              this.generateQuestion();
-              gameOn = true;
+              this.generateQuestion().then(() => {
+                gameOn = true;
+              });
             }, 1000);
           }
         }),
