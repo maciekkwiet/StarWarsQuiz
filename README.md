@@ -12,7 +12,7 @@ Działającą aplikację znajdziesz tutaj: [Star Wars Quiz](https://agitated-rid
 ## 📱 Wsparcie dla urządzeń mobilnych
 Quiz jest w pełni funkcjonalny również na urządzeniach moblinych:
 
-- smartfon (*iPhone X*):
+- smartfon (*iPhone 6/7/8*):
 
 ![Star Wars Quiz iPhoneX screenshot](static/assets/gh/star-wars-quiz-mobile2.png)
 
