@@ -1,3 +1,5 @@
+import { noScoresMessage } from '../constants';
+
 export class RankingBox {
   constructor(id, scores) {
     this.render(id, scores);
@@ -5,6 +7,9 @@ export class RankingBox {
 
   render(id, scores) {
     const rankingBoxContainer = document.querySelector(`#${id}`);
+    if (rankingBoxContainer) {
+      rankingBoxContainer.innerHTML = '';
+    }
     this.renderHeader(rankingBoxContainer);
     this.renderTable(scores, rankingBoxContainer);
   }
@@ -25,45 +30,52 @@ export class RankingBox {
   }
 
   renderTable(scores, rankingBoxContainer) {
-    const rankingTable = document.createElement('table');
-    rankingBoxContainer.appendChild(rankingTable);
-    rankingTable.classList.add('ranking-table');
+    if (scores.length > 0) {
+      const rankingTable = document.createElement('table');
+      rankingBoxContainer.appendChild(rankingTable);
+      rankingTable.classList.add('ranking-table');
 
-    const tableHeaderRow = document.createElement('tr');
-    rankingTable.appendChild(tableHeaderRow);
+      const tableHeaderRow = document.createElement('tr');
+      rankingTable.appendChild(tableHeaderRow);
 
-    const tableHeaderFirst = document.createElement('th');
-    tableHeaderRow.appendChild(tableHeaderFirst);
-    tableHeaderFirst.innerHTML = 'Place';
-    tableHeaderFirst.classList.add('first-column');
+      const tableHeaderFirst = document.createElement('th');
+      tableHeaderRow.appendChild(tableHeaderFirst);
+      tableHeaderFirst.innerHTML = 'Place';
+      tableHeaderFirst.classList.add('first-column');
 
-    const tableHeaderSecond = document.createElement('th');
-    tableHeaderRow.appendChild(tableHeaderSecond);
-    tableHeaderSecond.innerHTML = 'Player';
-    tableHeaderSecond.classList.add('second-column');
+      const tableHeaderSecond = document.createElement('th');
+      tableHeaderRow.appendChild(tableHeaderSecond);
+      tableHeaderSecond.innerHTML = 'Player';
+      tableHeaderSecond.classList.add('second-column');
 
-    const tableHeaderThird = document.createElement('th');
-    tableHeaderRow.appendChild(tableHeaderThird);
-    tableHeaderThird.innerHTML = 'Answered';
-    tableHeaderThird.classList.add('third-column');
+      const tableHeaderThird = document.createElement('th');
+      tableHeaderRow.appendChild(tableHeaderThird);
+      tableHeaderThird.innerHTML = 'Answered';
+      tableHeaderThird.classList.add('third-column');
 
-    for (let i = 0; i < scores.length; i++) {
-      const tableRow = document.createElement('tr');
-      rankingTable.appendChild(tableRow);
+      for (let i = 0; i < scores.length; i++) {
+        const tableRow = document.createElement('tr');
+        rankingTable.appendChild(tableRow);
 
-      const tableData1 = document.createElement('td');
-      tableRow.appendChild(tableData1);
+        const tableData1 = document.createElement('td');
+        tableRow.appendChild(tableData1);
 
-      tableData1.innerHTML = numberToOrdinal(i + 1);
-      const tableData2 = document.createElement('td');
-      tableRow.appendChild(tableData2);
+        tableData1.innerHTML = numberToOrdinal(i + 1);
+        const tableData2 = document.createElement('td');
+        tableRow.appendChild(tableData2);
 
-      tableData2.innerHTML = scores[i].player;
-      const tableData3 = document.createElement('td');
+        tableData2.innerHTML = scores[i].name;
+        const tableData3 = document.createElement('td');
 
-      tableRow.appendChild(tableData3);
-      tableData3.innerHTML =
-        scores[i].correctAnswers + '/' + scores[i].allAnswers;
+        tableRow.appendChild(tableData3);
+        tableData3.innerHTML =
+          scores[i].correctAnswers + '/' + scores[i].allAnswers;
+      }
+    } else {
+      const info = document.createElement('p');
+      info.classList.add('no-scores');
+      rankingBoxContainer.appendChild(info);
+      info.innerHTML = noScoresMessage;
     }
   }
 }
