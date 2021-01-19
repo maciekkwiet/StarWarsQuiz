@@ -4,6 +4,8 @@ export const rulesContent = [
   'You have one minute (1m) to answer as many questions as possible. During the game on each question you need to select which starship from Star Wars is showed on the left from available options.',
 ];
 
+export const noScoresMessage = 'There are no scores yet';
+
 export const boxContent = [
   'Who is this character?',
   'What is this vehicle?',

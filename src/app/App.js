@@ -17,9 +17,9 @@ import {
   initialGMIndex,
   whiteBtnText,
   playBtnText,
-  scores,
   mainMenuNames,
 } from './constants';
+import { getScoreLocalStorage } from './LocalStorage';
 
 class App {
   constructor(options, time, numberOfAnswers, totalQuestions) {
@@ -34,7 +34,6 @@ class App {
     this.box = new Box('box');
     this.modal = new Modal('modalBox');
     this.button = new Button('button', playBtnText, 'play-button');
-    this.rankingBox = new RankingBox('ranking-box', scores);
     this.rules = new Rules('Mode Rules', 'rules');
     this.picture = new Picture('picture');
     this.mainMenuPanel = new MainMenu(
@@ -42,7 +41,10 @@ class App {
       mainMenuNames,
       initialGMIndex,
     );
-    
+
+    this.scores = getScoreLocalStorage(this.mainMenuPanel.gameModeIndex);
+    this.rankingBox = new RankingBox('ranking-box', this.scores);
+
     this.whiteButton = new WhiteButton(
       'whiteButton',
       whiteBtnText[0],
@@ -96,6 +98,8 @@ class App {
     const rankingElement = document.querySelector('#ranking-box');
 
     if (whiteBtnContent.textContent === whiteBtnText[0]) {
+      this.scores = getScoreLocalStorage(this.mainMenuPanel.gameModeIndex);
+      this.rankingBox = new RankingBox('ranking-box', this.scores);
       whiteBtnContent.textContent = whiteBtnText[1];
       whiteBtnIcon.setAttribute('src', '../../static/assets/ui/school.svg');
       rulesElement.style.display = 'none';
@@ -188,7 +192,7 @@ class App {
       answerBtns.forEach((btn) =>
         btn.addEventListener('click', () => {
 
-          if(gameOn && this.questionsAnswerred < this.totalQuestions) {
+          if (gameOn && this.questionsAnswerred < this.totalQuestions) {
             const roundSummary = {
               playerAnswer: btn.textContent,
               correctAnswer: this.questionAnswers.correctAnswer,
@@ -206,7 +210,7 @@ class App {
               roundSummary.playerAnswerIsCorrect = false;
             }
             this.questionsAnswerred++;
-             this.gamePlaySummary.push(roundSummary);
+            this.gamePlaySummary.push(roundSummary);
             setTimeout(() => {
               for (let i = 0; i < answerBtns.length; i++) {
                 if (answerBtns[i].textContent === this.questionAnswers.correctAnswer) {

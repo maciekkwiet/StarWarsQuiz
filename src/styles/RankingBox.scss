@@ -7,19 +7,32 @@
   border-radius: 5px;
   display: none;
   justify-content: center;
-  align-content: space-around;
+  align-items: center;
   flex-wrap: wrap;
+  flex-direction: column;
   font-family: 'Montserrat', sans-serif;
+
+  .no-scores {
+    text-align: center;
+    padding-top: 50px;
+    font-size: 32px;
+  }
 
   @media (min-width: 750px) {
     border-radius: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .no-scores {
+      font-size: 16px;
+    }
   }
 }
 
 .ranking-header {
   font-size: 2.5vh;
   line-height: 1.2;
-  text-align: center;
+  align-items: center;
   display: flex;
   font-weight: 500;
   justify-content: center;
