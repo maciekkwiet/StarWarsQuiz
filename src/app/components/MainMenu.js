@@ -1,15 +1,21 @@
+import { getScoreLocalStorage } from '../LocalStorage';
+import { RankingBox } from './RankingBox';
+
 class MainMenu {
-  constructor(id, content, gameModeIndex) {
+  constructor(id, content, gameModeIndex, rankingBox) {
     this.content = content;
     this.gameModeIndex = gameModeIndex;
     this.render(id, content);
     this.underscores = document.querySelectorAll('.mainMenu > div > div');
+    this.rankingBox = rankingBox;
   }
 
   btnIndex(index, btns) {
     this.removeClasses(btns);
     this.addClasses(index, btns);
     this.gameMode(index);
+    this.scores = getScoreLocalStorage(this.gameModeIndex);
+    this.rankingBox = new RankingBox('ranking-box', this.scores);
   };
 
   removeClasses(btns) {
