@@ -40,6 +40,7 @@ class App {
       'mainMenu',
       mainMenuNames,
       initialGMIndex,
+      this.rankingBox
     );
 
     this.scores = getScoreLocalStorage(this.mainMenuPanel.gameModeIndex);
@@ -91,15 +92,19 @@ class App {
     location.reload(true);
   };
 
+  setScoresInRankingBox() {
+    this.scores = getScoreLocalStorage(this.mainMenuPanel.gameModeIndex);
+    this.rankingBox = new RankingBox('ranking-box', this.scores);
+  }
+
   rulesContent() {
+    this.setScoresInRankingBox();
     const whiteBtnContent = document.querySelector('.whiteButton span');
     const whiteBtnIcon = document.querySelector('.whiteButton img');
     const rulesElement = document.querySelector('#rules');
     const rankingElement = document.querySelector('#ranking-box');
 
     if (whiteBtnContent.textContent === whiteBtnText[0]) {
-      this.scores = getScoreLocalStorage(this.mainMenuPanel.gameModeIndex);
-      this.rankingBox = new RankingBox('ranking-box', this.scores);
       whiteBtnContent.textContent = whiteBtnText[1];
       whiteBtnIcon.setAttribute('src', '../../static/assets/ui/school.svg');
       rulesElement.style.display = 'none';
