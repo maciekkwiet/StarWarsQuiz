@@ -20,15 +20,6 @@ Quiz jest w pełni funkcjonalny również na urządzeniach moblinych:
 
 ![Star Wars Quiz iPad screenshot](static/assets/gh/star-wars-quiz-mobile1.png)
 
-## 💻 Uruchomienie projektu
-Aby uruchomić aplikację na lokalnej maszynie, wykonaj następujące kroki:
-1. Sklonuj repozytorium:
-`git pull https://github.com/KlaraGajaszek/CC2020Javascript.git`
-2. Zainstaluj zależności za pomocą komendy:
-`npm install`
-3. Wystartuj serwer developerski:
-`npm run start:dev`
-
 ## 💻 Wykorzystane technologie
 - JavaScript
 - HTML5
